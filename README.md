@@ -16,7 +16,8 @@ Whenever you want to make edits to any of our files, please cd into your local r
 $ git pull https://github.com/simonzheng/CS147-Group-Github.git (to have updated everything) (can be done at any time)
 make your changes locally
 
-$ git add -u <filename> (any time you create a new file (or edit one that already exists), add that file so git can track it) (-u flag stands for update)
+$ git add -u <filename> (any time you edit a file that already exists), add that file so git can track it) (-u flag stands for update)
+        - if you are just adding a new file, then same command but without '-u'
 
 $ git commit -m "your commit message"    - to commit your changes
 
