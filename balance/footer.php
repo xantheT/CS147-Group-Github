@@ -1,15 +1,15 @@
-<div class="navbar navbar-inverse navbar-fixed-bottom ">
-
+<div class=" navbar-fixed-bottom ">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <ul class="nav footer">
+        <li class="active"><a href="index.php"><img src="img/icons/home.png"></a></li>
+        <li><a href="profile.php"><img src="img/icons/profile.png"></a></li>
+        <li><a href="search.php"><img src="img/icons/search.png"></a></li>
+        <li><a href="settings.php"><img src="img/icons/settings.png"></a></li>
+      </ul>
+    </div>
+  </div>
 </div>
 
-<div class="bs-docs-example">
-            <div class="navbar">
-              <div class="navbar-inner">
-                <ul class="nav">
-                  <li class="active"><a href="#">Top stories</a></li>
-                  <li><a href="#">Recommended for you</a></li>
-                  <li><a href="#">Challenge me</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+
+            
