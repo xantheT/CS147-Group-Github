@@ -8,54 +8,17 @@
 
 	<body>
 	
-		<!-- NOte, add in a back button to the header... could use something like this but for 'back' instead of reload: 
-		<a href="javascript:document.location.reload();"><i class="icon-arrow-left icon-white refresh"></i></a>-->
 		<?php
 		//partial for the top banner of the page
 		include("banner.php");
 		?>
 
 
-
-        <div class="container">
-	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab">
-	  			<a href="#trending" class="btn active">Trending</a>
-	  			<a href="#you" class="btn">For you</a>
-	 			<a href="#challenge" class="btn">Challenge me</a>
-			</div>
+		<div class="container">
+		<h4>Headline</h4>
+		<p>Story contents</p>
 		</div>
 
-        <div class="container">
-        	<div id="myTabContent" class="tab-content">
-              <div class="tab-pane fade active in" id="trending">
-              	
-                <?php
-				//partial for the trending news results
-				include("trending.php");
-				?>
-
-              </div>
-              <div class="tab-pane fade" id="you">
-              	<?php
-				//partial for the trending news results
-				include("recommended.php");
-				?>
-              </div>
-              <div class="tab-pane fade" id="challenge">
-              	<?php
-				//partial for the trending news results
-				include("challengeMe.php");
-				?>
-              </div>
-            </div>
-        </div>
-
-        <!-- This div is a hack to give space between the content and the footer :(-->
-        <div class"container footerBuffer"> <p> </p></div>
-
-
-        
-		
 		<?php
 		//partial for the footer of the page
 		//NB: not sure if we can make this reusable because, 
