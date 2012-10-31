@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+
+<!-- SEARCH.PHP -->
+
 	<?php
 	//'head.php' includes all header information for all of our pages
 	// ie. everything that lives within <head>...info..</head> 
@@ -10,27 +13,25 @@
 	
 		<?php
 		//partial for the top banner of the page
+		$home='""';
+		$search='"active"';
+		$profile='""';
+		$settings='""';
 		include("banner.php");
 		?>
 
+		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
+		<div class="container firstOffset"><p>SEARCH</p></div>
 
-		<div class="container">
-		<h4>Headline</h4>
-		<p>Story contents</p>
-		</div>
-
+		<!-- Footer -->
 		<?php
 		//partial for the footer of the page
-		//NB: not sure if we can make this reusable because, 
-		// can't work out how to pass in the parameter to show which button on the nav should be 'active'
+		$story=false;
 		include("footer.php");
 		?>
 		
 		
 		
-		<!-- The javascript
-    	================================================== -->
-    	<!-- Placed at the end of the document so the pages load faster -->
 		<script type="text/javascript">
 		$("a").click(function (event) {
 		    event.preventDefault();
@@ -39,25 +40,7 @@
 		</script>
 
 
-
-
-		<!-- This does the js for the buttons just below the header-->
-		<!-- WOULD BE COOL IF YOU COULD SWIPE ACROSS TO change THESE too-->
-		<script type="text/javascript">
-			$('#btnTab a').click(function (e) {
-			  	e.preventDefault();
-			  $(this).tab('show');
-			})
-
-			$('#btnTab a[href="#trending"]').tab('show'); // Select tab by name
-			$('#btnTab a:first').tab('show'); // Select first tab
-			$('#btnTab a:last').tab('show'); // Select last tab
-			$('#btnTab li:eq(2) a').tab('show'); // Select third tab (0-indexed)
-		</script>
-
-
-
-		<!-- Below java script from twitter bootstrap-->
+				<!-- Below java script from twitter bootstrap-->
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
 		<script src="js/bootstrap-button.js"></script>

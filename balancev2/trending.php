@@ -52,6 +52,42 @@
   		</p>
   	</a></div>
   </li>
+
+
+  <!-- Padded out with a bun of extra stories-->
+   <li>
+     <div><a href="story.php">   <!-- Link to indiv story-->
+      <img src="img/examples/lance.jpg" class="subStory"> 
+    Lance Armstrong likely will have Boston Marathon time vacated     
+    <br>
+      <p class="muted small">Boston.com - 2d ago
+      <span class="label label-success">0%</span>
+      <i class="icon-chevron-right"></i>
+      </p>
+    </a></div>
+  </li>
+   <li>
+     <div><a href="story.php">   <!-- Link to indiv story-->
+      <img src="img/examples/lance.jpg" class="subStory"> 
+    Lance Armstrong likely will have Boston Marathon time vacated     
+    <br>
+      <p class="muted small">Boston.com - 2d ago
+      <span class="label label-success">0%</span>
+      <i class="icon-chevron-right"></i>
+      </p>
+    </a></div>
+  </li>
+   <li>
+     <div><a href="story.php">   <!-- Link to indiv story-->
+      <img src="img/examples/lance.jpg" class="subStory"> 
+    Lance Armstrong likely will have Boston Marathon time vacated     
+    <br>
+      <p class="muted small">Boston.com - 2d ago
+      <span class="label label-success">0%</span>
+      <i class="icon-chevron-right"></i>
+      </p>
+    </a></div>
+  </li>
 </ul>
 
 

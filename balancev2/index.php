@@ -8,16 +8,18 @@
 
 	<body>
 	
-		<!-- NOte, add in a back button to the header... could use something like this but for 'back' instead of reload: 
-		<a href="javascript:document.location.reload();"><i class="icon-arrow-left icon-white refresh"></i></a>-->
+		<!-- NOte,back button to the header... make invisible on homepage??? -->
 		<?php
 		//partial for the top banner of the page
+		$home='"active"';
+		$search='""';
+		$profile='""';
+		$settings='""';
 		include("banner.php");
 		?>
 
 
-
-        <div class="container">
+        <div class="container firstOffset">
 	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab">
 	  			<a href="#trending" class="btn active">Trending</a>
 	  			<a href="#you" class="btn">For you</a>
@@ -50,16 +52,11 @@
             </div>
         </div>
 
-        <!-- This div is a hack to give space between the content and the footer :(-->
-        <div class"container footerBuffer"> <p> </p></div>
-
-
         
 		
 		<?php
 		//partial for the footer of the page
-		//NB: not sure if we can make this reusable because, 
-		// can't work out how to pass in the parameter to show which button on the nav should be 'active'
+		$story=false;
 		include("footer.php");
 		?>
 		

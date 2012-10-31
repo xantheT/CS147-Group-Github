@@ -1,5 +1,8 @@
 
+<!-- This div is a hack to give space between the content and the footer :(-->
+<div class="container footerBuffer"></div>
 
+<!-- Footer start-->
 <div class=" navbar-fixed-bottom ">
   <div class="navbar">
     <div class="navbar-inner">
@@ -12,6 +15,14 @@
     </div>
   </div>
 </div>
+
+
+            
+
+
+
+
+
 
 
             
