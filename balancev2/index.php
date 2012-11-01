@@ -8,7 +8,7 @@
 
 	<body>
 	
-		<!-- NOte,back button to the header... make invisible on homepage??? -->
+		<!-- Note,back button to the header... make invisible on homepage??? -->
 		<?php
 		//partial for the top banner of the page
 		$home='"active"';

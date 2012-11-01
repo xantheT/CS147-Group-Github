@@ -21,7 +21,15 @@
 		?>
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
-		<div class="container firstOffset"><p>SEARCH</p></div>
+		<div class="container firstOffset">
+			<form class="navbar-search pull-left">
+			<input type="text" class="search-query" placeholder="Search">
+			<button type="submit" class="btnSearch"><i class="icon-search"></i></button>
+			</form>
+
+			<br><br><br>
+			<p class="muted"> Search results to be displayed dynamically here based on db querying</p>
+		</div>
 
 		<!-- Footer -->
 		<?php

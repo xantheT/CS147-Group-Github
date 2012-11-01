@@ -21,7 +21,17 @@
 		?>
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
-		<div class="container firstOffset"><p>SETTINGS</p></div>
+		<div class="container firstOffset">
+			<div data-role="content">
+			<p> Our records indicate that you are not yet logged in! Please either login or register</p>
+			<a href="login.php"><button class="btn btn-large btn-block btn-primary" type="button">Login</button></a>
+			<a href="register.php"><button class="btn btn-large btn-block" type="button">Register</button></a>
+				
+			</div>
+		
+		
+		
+		</div>
 
 		<!-- Footer -->
 		<?php

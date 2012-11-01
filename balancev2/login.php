@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-	<!-- PROFILE.PHP -->
+
+<!-- LOGIN.PHP -->
 
 	<?php
 	//'head.php' includes all header information for all of our pages
@@ -14,36 +15,44 @@
 		//partial for the top banner of the page
 		$home='""';
 		$search='""';
-		$profile='"active"';
-		$settings='""';
+		$profile='""';
+		$settings='"active"';
 		include("banner.php");
 		?>
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container firstOffset">
-
-			<p class="lead">Welcome to your profile page</p>
-			<p>Take our quiz to see where on the political spectrum you lie</p>
-			<a href="quiz.php" class="btn btn-mini btn-info">Take the quiz!</a>
-			<br><br>
-			<p class="lead">Recommended reads</p>
-			<?php echo "...this is dynamically filled with the recommendations based on the user's political preferences, pull this info from the database";?>
-			<br><br>
-			<p class="lead">Recently read</p>
-			<?php echo "...this is dynamically filled with the latest articles user read, using the database";?>
-			
-			<br><br>
+			<div data-role="content">
+		
+			<form id="form" action="enter.php" method="post">
+				<div data-role="fieldcontain">
+			     <label for="foo">Username:</label>
+			     <input type="text" name="username" id="foo" value="" autocapitalize="off" />
+				</div>
+				<div data-role="fieldcontain">
+			     <label for="foo">Password:</label>
+			     <input type="password" name="password" id="foo" value=""  />
+				</div>
+				
+				<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
+			</form>
+				
+			<div id="info">
+				<p>Once you log in, you should be able to see all of your user information!.</p>
+			</div>	
+			</div>
+		
+		
+		
 		</div>
 
-
-
-	<!-- Footer -->
+		<!-- Footer -->
 		<?php
 		//partial for the footer of the page
 		$story=false;
 		include("footer.php");
 		?>
-
+		
 		
 		<script type="text/javascript">
 		$("a").click(function (event) {
@@ -51,6 +60,7 @@
 		    window.location = $(this).attr("href");
 		});
 		</script>
+
 
 		<!-- Below java script from twitter bootstrap-->
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
@@ -71,7 +81,6 @@
 	    <script src="js/bootstrap-typeahead.js"></script>
 	    <script src="js/bootstrap-affix.js"></script>
 	    <script src="js/application.js"></script>
-
 
 
 	</body>
