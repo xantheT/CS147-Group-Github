@@ -1,0 +1,89 @@
+.navbarText {
+	color: #81817B;
+	text-align: center;
+}
+
+.menu {
+	padding-bottom: 0px;
+}
+
+.banner {
+	vertical-align: center;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.refresh {
+	float: right;
+	margin-top: -5px;
+	padding-right: 8px;
+	margin-top: 3px;
+}
+
+.footer {
+	max-height: 40px;
+	width: 100%;
+}
+
+.footer li {
+	width: 20%;
+	text-align: center;
+}
+
+.logo {
+	width: 30px;
+	height: 30px;
+}
+
+.splash {
+	vertical-align: top;
+	padding-top: 4px;
+}
+
+p .muted .small {
+	color: #999;
+	font-size: 85%;
+}
+
+.subStory {
+	height: 60px;
+	width: 60px;
+	float: left;
+	padding-right: 5px; 
+}
+
+.subStory i {
+	float: right;
+}
+
+.story a:hover{
+	text-decoration: none;
+}
+
+
+
+.plain:hover{
+	text-decoration: none;
+}
+
+
+/*  Header */
+
+.backBtn {
+	float: left;
+	padding-left: 10px;
+}
+
+.headerList li {
+	width: 100%;
+}
+
+.headerList li i {
+	padding-right: 10px;
+}
+
+
+
+
+
+
