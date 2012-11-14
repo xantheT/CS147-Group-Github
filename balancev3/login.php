@@ -15,6 +15,12 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container">
+			<!-- back button--> 
+          	<p>
+          		<a href="javascript:history.go(-1)"><img src="img/icons/back.png" class="topBackBtn"></a>
+          		<a href="#" rel="popover" data-content="Please do not give us sensitive information. We cannot gurantee perfect site security at this time." data-placement="bottom" class="topInfoBtn"><img src="img/icons/info.png"> </a>
+          		<!-- NB: the info icon is from creative commons: http://www.iconfinder.com/icondetails/63436/128/information_icon-->
+          	<br /></p>
 			<h1><img src="img/logo.png" class="logo splash"> Balance</h1>
 			<div data-role="content">
 
@@ -37,7 +43,7 @@
 				
 				<button class="btn btn-info" type="submit" data-theme="b" name="submit" value="submit-value">Log in</button>
 			</form>
-			<a class="plain" href="#uhoh">Forgot password?</a>
+			<a class="plain" href="mailto:sax@balance.com?Subject=Uh oh!&body=Eek, please help me, I forgot my password.">Forgot password?</a>
 			<br><br>
 
 			

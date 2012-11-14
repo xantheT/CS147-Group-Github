@@ -23,23 +23,77 @@
 
 
 		<div class="container firstOffset">
-			<!-- Insert php stuff to pull from db and populate story here!!! -->
-		<!-- source OF STORY-->
-		<p class="muted small">NBCNews.com, 6s ago   <span class="label label-important">52%</span></p>
-		<!-- HEADLINE OF STORY-->
-		<h4>Romney: Election outcome will be defining for American families</h4>
-		<!-- PIC FOR STORY-->
-		<p><img src="img/examples/politics.jpg" alt="" /></p>
-		<!-- BODY OF STORY-->
-		<p>With just under a week to go before Election Day, the Romney campaign has a case of the blues -- the electoral kind.</p>
-		<p>Yesterday brought the news that the campaign was wading into Pennsylvania, traditionally safe Democratic territory, with a flight 
-			of televised campaign ads set to begin today.</p>
-		<p>According to a source tracking television ad buys in the battleground states, the Romney campaign has already reserved nearly $600,000 worth of air time in the Philadelphia media market, 
-			and the GOP campaign's move comes close on the heels of the news that the Obama campaign is also going on the air in the Keystone State. The initial size of the Obama ad buy is $650,000 on broadcast and cable in the Philadelphia and Pittsburgh areas from Oct. 31 through Nov. 6.</p>
-		<p>And it's not just Pennsylvania. Late last week, both campaigns took to the airwaves in another typically blue state -- Minnesota --- and now there are signs of movement in Michigan too. ABC News recently changed Pennsylvania and Minnesota's rating from "safe" to "lean" Democratic.
-		 Michigan remains in solid Obama territory.</p>
-		<p>It is possible that both campaigns' investments will grow before next Tuesday. And Romney's buy is bolstering the effort of several GOP outside groups, including the pro-Romney super PAC, Restore Our Future, which announced
-		 a multi-million advertising blitz in many of these states. So, why are the Romney campaign and Republican outside groups moving into blue territory like Minnesota, Pennsylvania and Michigan?</p>
+		<?php
+			include("config.php");
+			//Get the ID from the URL argument after .../story.php?id=x
+			$id = $_GET["id"];
+			
+			if ($id == '') {
+				$query = "SELECT * FROM balance_stories";
+				$all_stories = mysql_query($query);
+				$num_stories = mysql_num_rows($all_stories);
+				$random_index = rand(1, $num_stories);
+				$id = (string)$random_index;
+			}
+			//check for story against db
+			$query = sprintf("SELECT * FROM balance_stories WHERE id='%s'", mysql_real_escape_string($id));
+			// Perform Query
+			$result = mysql_query($query);
+			// This tells you how many rows were returned
+			$num_rows = mysql_num_rows($result);
+			if ($num_rows == 0) {  // if we did not find a single user
+				//SET ERROR MESSAGE HERE
+				//header("Location: ./login.php?error");
+				echo "Error! \nNo stories were found from the database with for your query: ".$query."!\n This is not your search query's fault but a team of acrobatic pokemon have been dispatched to fix our database. Pika!";
+				// This below exit code makes the back button and everything nonfunctional because it doesn't execute anything after this point and the javascript is at the bottom :( :(
+				//exit();
+			} else {
+				$row = mysql_fetch_object($result);
+			
+			$source = $row->source;
+			$time = $row->time;
+			$social_scale = $row->social_scale;
+			$fiscal_scale = $row->fiscal_scale;
+			$title = $row->title;
+			$picture = "img/stories/".$row->picture;
+			$text = $row->text;
+			$url = $row->url;
+
+
+			//logic to get correct 'ago' time format
+			$time = time_ago($time);
+			//logic to return <span>s for the % labels for story
+			$percentageLabels = get_percentage_labels_span($row);
+			
+			// source OF STORY
+			echo "<p class=\"muted small\">".$source.", ".$time
+				." ".$percentageLabels;
+			// HEADLINE OF STORY
+			echo "<h4>".$title."</h4>";
+			// PIC FOR STORY
+			echo "<p><img src=\"".$picture."\" alt=\"alternative text here\"/></p>";
+			// BODY OF STORY
+			echo "<p> ".$text."</p>";
+			echo "<p> Read More: <a href=\"".$url."\"> Here </a></p>";
+			
+
+			//--Insert this story into the db as read!--
+			$user = getCurrUser(); //get user - helper fn from 'helper_fns.php'
+			$storiesString = $user->stories_read;  //get user's stories
+			$storiesString = $row->id.",".$storiesString; //update their stories
+			include("config.php"); //put the updated stories list back into db
+			$query = sprintf("UPDATE balance_users SET stories_read='%s' WHERE id=%d",
+				mysql_real_escape_string($storiesString),
+				mysql_real_escape_string($_SESSION['user_id'])
+			);
+			// Actually update db now
+			$result = mysql_query($query);
+
+
+			}
+		
+		?>
+
 		</div>
 
 

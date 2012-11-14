@@ -38,34 +38,39 @@
 				  <div class="accordion-group">
 				    <div class="accordion-heading">
 				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-				        Collapsible Test Item #1
+				        About Balance
 				      </a>
 				    </div>
 				    <div id="collapseOne" class="accordion-body collapse">
 				      <div class="accordion-inner">
-				        This is fake test text for Amit to fill in the real stuff
+				        In the face of increasingly polarized news where the most extreme voices are the loudest, Balance gives you access to a spectrum of views to form a balanced opinion.
 				      </div>
 				    </div>
 				  </div>
 				  <div class="accordion-group">
 				    <div class="accordion-heading">
 				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-				        Collapsible Test Item #2
+				        Help
 				      </a>
 				    </div>
 				    <div id="collapseTwo" class="accordion-body collapse">
 				      <div class="accordion-inner">
-				        Oh look this is also some fake text and Amit is going to play around with akll of this and put cool stuff in
+				        Please  <a href="mailto:sax@balance.com?Subject=Hello Balance!">
+email us</a> for any suggestions/complaints.
 				      </div>
 				    </div>
 				  </div>
+
+				  <div class="accordion-group">
+				  		    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="./post_logout.php">
+				        Log Out
+				      </a>
+				    </div>
 				</div>
 
 
-				<!-- MUST PUT IN LOG OUT HERE: and when log out <?php //session_destroy(); then redirect to splash.php?> -->
-				<a href="./post_logout.php"><button class="btn btn-mini">Log out</button>
-				
-		</div>
+				</div>
 
 		<!-- Footer -->
 		<?php

@@ -17,11 +17,11 @@
       </ul>';
       } else {
         echo '<ul class="nav footer">
-        <li><a href=""><i class="icon-share icon-white"></i></a></li>
+        <li><a href=""><!--<i class="icon-share icon-white">--></i></a></li>
         <li><a href=""><i class="icon-thumbs-up icon-white"></i></a></li>
         <li><a href="story.php"><img src="img/logo.png" class="logo"></a></li>
         <li><a href=""><i class="icon-thumbs-down icon-white"></i></a></li>
-        <li><a href=""><i class="icon-arrow-down icon-white"></i></a></li>
+        <li><a href=""><!--<i class="icon-arrow-down icon-white">--></i></a></li>
       </ul>';
       }
       //redo the icon sizes... and rethink what will be the furthest right icon (hides banner & footer maybe???)

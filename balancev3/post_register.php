@@ -45,24 +45,30 @@
 			mysql_real_escape_string($username),
     		mysql_real_escape_string($password_to_save));
 	// Perform Query
-	$userResult = mysql_query($userQuery);
+	$resultRow = mysql_query($userQuery);
+	$user = mysql_fetch_object($resultRow);
 
 
 	//SET SESSION HERE - NOW - start the session and redirect to 'profile'????
+	session_save_path('./session/');  //every new session gets stored in a file - NB. this is not very secure
 	session_start();
-	$_SESSION['xanthe'] = "session seemes to work for user: ".$username; // store session data???
-	$_SESSION['user_id'] = mysql_result($userResult, 0, 0); //refers to row 0 of the results, and column 0 (in our php table)
-	$_SESSION['isActive'] = true;   // This will be used to check the session
-	header("Location: ./profile.php");
-	exit();
-?>
+
+	$_SESSION['user_id'] = $user->id; 
+	?>
+
+<!-- Now set the persistent info for the session-->
+<script type="text/javascript">
+	localStorage.setItem('user_id', '<?=$_SESSION["user_id"];?>');   //sets info for the persistent session
+    window.location = "./profile.php"; //redirects to the profile page after succesful registration
+</script>
+
+
+
 
 <!-- THIS IS JUST A TEMPLATE FILE - it does calculations 
 	to decide whether log in was successful or not and redirects appropriately-->
-
-
-	<!DOCTYPE html>
+<!DOCTYPE html>
 	<html>
-	<body>
-	</body>
+		<body>
+		</body>
 	</html>

@@ -35,6 +35,11 @@
 	height: 30px;
 }
 
+.minilogo {
+	width: 15px;
+	height: 15px;	
+}
+
 .splash {
 	vertical-align: top;
 	padding-top: 4px;
@@ -74,6 +79,22 @@ p .muted .small {
 	padding-left: 10px;
 }
 
+.topBackBtn {
+	float: left;
+	width:12px;
+	height: 12px;
+	padding-top: 5px;
+}
+
+.topInfoBtn {
+	float: right;
+	padding-right: 60px;
+	vertical-align: top;
+	width:20px;
+	height: 20px;
+}
+
+
 .headerList li {
 	width: 100%;
 }
@@ -82,6 +103,59 @@ p .muted .small {
 	padding-right: 10px;
 }
 
+
+
+
+/* For the main story at top of hoe page */
+.mainStory {
+	position: relative;
+	margin-bottom: 5px;
+	line-height: 1;
+}
+
+.mainStory-inner {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.mainStory-caption{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 5px;
+	background: #333;
+	background: rgba(0, 0, 0, 0.75);
+}
+
+.mainStory-caption p{
+	line-height: 20px;
+	color: white;
+	margin-bottom: 0px;
+}
+.mainStory-caption span {
+	line-height: 20px;
+	margin-bottom: 2px;
+}
+
+
+/* Stuff for the d3 graph*/
+.axis text {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 10px;
+	color: #333;
+}
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #333;
+	shape-rendering: crispEdges;
+}
+.dot {
+	stroke: red;
+	fill: blue;
+}
 
 
 

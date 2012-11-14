@@ -3,8 +3,7 @@
 				$entered_password = $_POST["password"];
 
 
-				//salt $entered_password to check in db, salted pwd should be saved in db and be unique for each user.
-				//Consider building this out. For now, each user has the same salt. Not terribly safe.
+				//salt $entered_password to check in db
 				$salt = "kr";
 				// This saved_password would be saved in the database.
 				$saved_password = crypt($entered_password, $salt); 
@@ -18,25 +17,29 @@
 				$result = mysql_query($query);
 			     // This tells you how many rows were returned
 				$num_rows = mysql_num_rows($result);
-				if ($num_rows == 1) {
-					//SET SESSION HERE
-					session_start();
-					$_SESSION['user_id'] = mysql_result($result, 0, 0); //refers to row 0 of the results, and column 0 (in our php table)
-					$_SESSION['isActive'] = true;
-					header("Location: ./index.php");
-					exit();
-				} else {
+				if ($num_rows != 1) {  //if we did not find a single user
 					//SET ERROR MESSAGE HERE
 					header("Location: ./login.php?error");
-					exit();			
+					exit();								
+				} else {
+					//SET SESSION HERE if login was correct
+					session_save_path('./session/');  //every new session gets stored in a file - NB. this is not very secure
+					session_start();
+					$row = mysql_fetch_object($result);
+					$_SESSION['user_id'] = $row->id; 
 				}
-
 			?>
+		<!-- At this point, if the login was wrong then the user has been redirected. 
+			So if it is right, we arrive here and now set the persistent session info and then redirect-->
+		<script type="text/javascript">
+			localStorage.setItem("user_id", "<?=$_SESSION['user_id'];?>"); 
+			window.location = "./index.php";
+		</script>
+
+
 
 <!-- THIS IS JUST A TEMPLATE FILE - it does calculations 
 	  to decide whether log in was successful or not and redirects appropriately-->
-
-
 <!DOCTYPE html>
 <html>
 	<body>
