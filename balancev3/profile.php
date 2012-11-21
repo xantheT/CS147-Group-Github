@@ -43,38 +43,6 @@
 				//--------------------------------
 				//-- BELOW IS FOR THE USER'S SCORE! --
 				//--------------------------------
-				 //get some color to their Scores and adjust db score to % for user.
-				//get the number in our db then assign to C (>50) or L (<50)
-					//Then use the num to give the user a % strength for either c or l
-					//Where 100% L = 0 in the db, 50% L = 25 in db,
-					// 50% C = 75 in the db, 100%C = 100 in db. 
-				if ($user->fiscal_scale > 50) {
-					$fiscString = "class= 'label label-important'"; //displays red
-					$fNum = (($user->fiscal_scale - 50)/50) *100;   
-					$fiscLabel = "% Conservative";
-				} elseif ($user->fiscal_scale == 50) { //this case should be fairly rare... I think
-					$fiscString = "class = 'label'"; //displays grey
-					$fNum = "";
-					$fiscLabel = "Completely neutral";
-				} else {  //LIBERAL
-					$fiscString = "class= 'label label-info'"; //displays blue
-					$fNum = (50-($user->fiscal_scale))*2;
-					$fiscLabel = "% Liberal";
-				}
-
-				if ($user->social_scale > 50) {
-					$socString = "class= 'label label-important'"; //displays red
-					$sNum = (($user->social_scale - 50)/50) *100;
-					$socLabel = "% Conservative";
-				} elseif ($user->social_scale == 50) {
-					$socString = "class = 'label'"; //displays grey
-					$sNum = "";
-					$socLabel = "Completely neutral";
-				} else { //LIBERAL
-					$socString = "class= 'label label-info'"; //displays blue
-					$sNum = (50 -($user->social_scale))*2;
-					$socLabel = "% Liberal";
-				}
 
 			?>
 
@@ -82,14 +50,14 @@
 			<p class="lead"><strong><?php echo $user->username; ?>'s profile</strong></p>
 
 			<p>Where do you fall on the political spectrum?</p>
-			<p>Fiscal score: <span <?php echo $fiscString; ?>><?php echo $fNum.$fiscLabel; ?></span><br />
-			Social score: <span <?php echo $socString; ?>><?php echo $sNum.$socLabel; ?></span></p>
+			<p>Fiscally: <?php echo get_fiscal_score_html($user); ?><br />
+			   Socially: <?php echo get_social_score_html($user); ?></p><br />
 
 			<!-- FOR THE GRAPH!!!! This get's modified on the fly by jscript-->
 			<div id="graph"></div>
 
-			<p>Sharpen our score for you:
-			<a href="quiz.php" class="btn btn-mini btn-info">Take the quiz!</a></p>
+			<p>Sharpen your score:
+			<a href="quiz.php" class="btn btn btn-info">Take the quiz!</a></p>
 			<a href="#" class="btn btn-mini" rel="popover" data-placement="right" 
 				data-content="<img src='./img/politicalSpec1'><br><img src='./img/politicalSpec2'>
 				<p class='muted small'>Scores range from 0 to 100: from Left to Right fiscally speaking, then
@@ -180,7 +148,7 @@
 				var xdata = [<?php echo $user->fiscal_scale; ?>], //User data inout from db
 					ydata = [<?php echo $user->social_scale; ?>];
 
-				var margin = {top: 20, right: 20, bottom: 20, left: 20},
+				var margin = {top: 25, right: 20, bottom: 25, left: 15},
 				    width = 300 - margin.left - margin.right,
 				    height = 300 - margin.top - margin.bottom;
 
@@ -200,10 +168,14 @@
 				// set the axes
 				var xAxis = d3.svg.axis()
 				    .scale(x)
-				    .orient("bottom");
+				    .orient("bottom")
+				    //.tickValues([]);
+				    .tickValues([]);
 
 				var yAxis = d3.svg.axis()
 				    .scale(y)
+				    //.tickValues([])
+				    .tickValues([])
 				    .orient("left");
 
 				var chart = d3.select(document.getElementById("graph"))
@@ -222,40 +194,103 @@
 				//draw the axes
 				main.append('g')
 					.attr('transform', 'translate(0,' + height/2 + ')')
-					.attr('class', 'main axis date')
+					.attr('class', 'main axis')
 					.call(xAxis)
-				    .append("text") //Puts on the axis label
+				    /*.append("text") //Puts on the axis label
 				      .attr("class", "label")
 				      .attr("x", width)
 				      .attr("y", -6)
 				      .style("text-anchor", "end")
-				      .text("Fiscal Scale");
+				      .text("Fiscal Scale")*/;
 
 
 				main.append('g')
 					.attr('transform', 'translate(' + width/2 + ',0)')
-					.attr('class', 'main axis date')
+					.attr('class', 'main axis')
 					.call(yAxis)
-					.append("text")  //Puts on the axis label
+					/*.append("text")  //Puts on the axis label
 				      .attr("class", "label")
 				      .attr("transform", "rotate(-90)")
 				      .attr("y", 6)
 				      .attr("dy", ".71em")
 				      .style("text-anchor", "end")
-				      .text("Social Scale")
-				  
+				      .text("Social Scale")*/;
+
+
+				//add background color
+				main.append("svg:circle")
+				      	  .attr("class", "dot")
+				          .attr("cy", function (d,i) { return y(ydata[i]); } )
+				          .attr("cx", function (d,i) { return x(xdata[i]); } )
+				          .attr("r", 10); //size of the dots
+				 
 
 				var g = main.append("svg:g");
 
 				//draw the dots
-				g.selectAll("scatter-dots")
+				/*g.selectAll("scatter-dots")
 				      .data(ydata)
 				      .enter().append("svg:circle")
-				      	  .attr("class", "dot")
-				          .attr("cy", function (d) { return y(d); } )
-				          .attr("cx", function (d,i) { return x(xdata[i]); } )
-				          .attr("r", 10) //size of the dots
-				          .style("opacity", 0.6);
+				      	  .attr("class", "backDot")
+				          .attr("cy", function (d,i) { return y(50); } )
+				          .attr("cx", function (d,i) { return x(50); } )
+				          .attr("r", 26); //size of the dots*/
+
+				//label for the data point
+				g.selectAll("text")
+				   .data(xdata)
+				   .enter()
+				   .append("text")
+				   .text(function(d) { return "you"}) //The label ...//return xdata[0] + "," + ydata[0]; })
+				   .attr("y", function (d,i) { return y(ydata[i] + 3.5); } )
+				   .attr("x", function (d,i) { return x(xdata[i]+ 3.5); } )
+				   .attr("font-size", "11px")
+				   .attr("fill", "gray");
+
+				//another axis label   
+				main.append('g')
+				   .append("text")
+				   .text("Fiscal Liberal") 
+				   .attr("y", function (d) { return y(53); } )
+				   .attr("x", function (d) { return x(-5); } )
+				   .attr("class", "label");
+
+				//another axis label   
+				main.append('g')
+				   .append("text")
+				   .text("Fiscal Conservative") 
+				   //.attr("transform", "rotate(-90)")
+				   .attr("y", function (d) { return y(53); } )
+				   .attr("x", function (d) { return x(65); } )
+				   .attr("class", "label")
+				   
+				   ;
+
+				//another axis label   
+				main.append('g')
+				   .append("text")
+				   .text("Social Liberal") 
+				   .attr("y", function (d) { return y(-10); } )
+				   .attr("x", function (d) { return x(35); } )
+				   .attr("class", "label");
+
+				//another axis label   
+				main.append('g')
+				   .append("text")
+				   .text("Social Conservative") 
+				   .attr("y", function (d) { return y(105); } )
+				   .attr("x", function (d) { return x(28); } )
+				   .attr("class", "label");
+
+				//another axis label   
+				/*main.append('g')
+				   .append("text")
+				   .text("Moderate") 
+				   .attr("y", function (d) { return y(43); } )
+				   .attr("x", function (d) { return x(40); } )
+				   .attr("class", "label");
+				   */
+
 
 				</script>
 <!-- End of graph javascript-->

@@ -13,7 +13,7 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container">
-			
+			<div><br /><br /></div>
 			<h1><img src="img/logo.png" class="logo splash"> Balance</h1>
 
 			<?php 
@@ -25,10 +25,11 @@
 
 			<div data-role="content">
 			<p> Welcome! Please login or register.</p>
+			<br />
+			<br />
+			<a class="plain" href="login.php"><button class="btn btn-large btn-block btn-info" id="huge1" type="button">Login</button></a>
 			<br>
-			<a class="plain" href="login.php"><button class="btn btn-large btn-block btn-info" type="button">Login</button></a>
-			<br>
-			<a class="plain" href="register.php"><button class="btn btn-large btn-block" type="button">Register</button></a>
+			<a class="plain" href="register.php"><button class="btn btn-large btn-block" id="huge2" type="button">Register</button></a>
 				
 			</div>
 		

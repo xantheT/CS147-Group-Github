@@ -34,7 +34,8 @@
 		
 
 			<!-- AMIT's awesome work lives in here-->
-				<div class="accordion" id="accordion2">
+			 <!-- This is the collapse-able About Us box -->
+				<div class="accordion story" id="accordion2">
 				  <div class="accordion-group">
 				    <div class="accordion-heading">
 				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
@@ -47,10 +48,26 @@
 				      </div>
 				    </div>
 				  </div>
+				  
+				  <!-- This is the collapse-able Tutorial box -->
 				  <div class="accordion-group">
 				    <div class="accordion-heading">
 				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-				        Help
+				        Tutorial
+				      </a>
+				    </div>
+				    <div id="collapseTwo" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				        Click <a href="tutorial_pg1.html" id="key" data-icon="custom">here</a> to retake the Balance Tutorial.
+				      </div>
+				    </div>
+				  </div>
+				  
+				   <!-- This is the collapse-able Contact Us box -->
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+				        Contact Us
 				      </a>
 				    </div>
 				    <div id="collapseTwo" class="accordion-body collapse">
@@ -60,7 +77,8 @@ email us</a> for any suggestions/complaints.
 				      </div>
 				    </div>
 				  </div>
-
+				  
+				   <!-- This is the Logout link -->
 				  <div class="accordion-group">
 				  		    <div class="accordion-heading">
 				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="./post_logout.php">

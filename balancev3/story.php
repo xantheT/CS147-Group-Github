@@ -34,6 +34,7 @@
 				$num_stories = mysql_num_rows($all_stories);
 				$random_index = rand(1, $num_stories);
 				$id = (string)$random_index;
+				$_GET["id"] = $id;
 			}
 			//check for story against db
 			$query = sprintf("SELECT * FROM balance_stories WHERE id='%s'", mysql_real_escape_string($id));
@@ -62,19 +63,18 @@
 
 			//logic to get correct 'ago' time format
 			$time = time_ago($time);
-			//logic to return <span>s for the % labels for story
-			$percentageLabels = get_percentage_labels_span($row);
 			
-			// source OF STORY
-			echo "<p class=\"muted small\">".$source.", ".$time
-				." ".$percentageLabels;
 			// HEADLINE OF STORY
 			echo "<h4>".$title."</h4>";
+			// source OF STORY
+			echo "<p class=\"muted small\">".$source.", ".$time
+				." ".get_social_score_html($row)." ".get_fiscal_score_html($row);
 			// PIC FOR STORY
 			echo "<p><img src=\"".$picture."\" alt=\"alternative text here\"/></p>";
 			// BODY OF STORY
 			echo "<p> ".$text."</p>";
-			echo "<p> Read More: <a href=\"".$url."\"> Here </a></p>";
+			echo "<a href=\"".$url."\"><p>Click here to read in full</p></a>";
+			echo "<br />";
 			
 
 			//--Insert this story into the db as read!--
@@ -120,19 +120,7 @@
 
 
 
-		<!-- This does the js for the buttons just below the header-->
-		<!-- WOULD BE COOL IF YOU COULD SWIPE ACROSS TO change THESE too-->
-		<script type="text/javascript">
-			$('#btnTab a').click(function (e) {
-			  	e.preventDefault();
-			  $(this).tab('show');
-			})
 
-			$('#btnTab a[href="#trending"]').tab('show'); // Select tab by name
-			$('#btnTab a:first').tab('show'); // Select first tab
-			$('#btnTab a:last').tab('show'); // Select last tab
-			$('#btnTab li:eq(2) a').tab('show'); // Select third tab (0-indexed)
-		</script>
 
 
 

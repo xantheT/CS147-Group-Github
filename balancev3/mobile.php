@@ -1,12 +1,4 @@
 <?php
-//	include 'Mobile_Detect.php';
-//	$detect = new Mobile_Detect();
-//	
-//	if (!$detect->isMobile()) {
-//	    // Any mobile device.
-//	    header("Location: mobiletest/iphone.php?url=stanford.edu/~szheng0/cgi-bin/balancev3/mobile.php");
-//	}
-	
 	//'session_check.php' checks if the session is active and if not 
 	// redirects to the splash page
 	include("session_check.php");
@@ -15,46 +7,13 @@
 
 
 
-
-
 <!DOCTYPE html>
 <html>
 	<?php
 	//'head.php' includes all header information for all of our pages
 	// ie. everything that lives within <head>...info..</head> 
-	//include("head.php");
+	include("head.php");
 	?>
-	
-	<!--======================================= -->
-	<!-- REMOVE THIS AFTER THE OPTIMIZELY!!!!! and put the include above back in  -->
-	<head>
-		<script src="//cdn.optimizely.com/js/141317990.js"></script>
-		<title>Balance</title>
-
-		<!--Favicon and touch icons-->
-		<!-- Deal with these later -->
-		<link rel="shortcut icon" href="img/favicon.ico">
-		<link rel="apple-touch-icon" href="img/appicon.png" /> 
-		<link rel="apple-touch-startup-image" href="img/startup.png"> 
-
-		<!-- Stuff for displaying on mobile-->
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="viewport" content="width=device-width, user-scalable=no" />
-
-		<!--Below line, from Rio's examples, ask him if we don't know what it is-->
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-		
-		<!-- Our style sheet-->
-		<link href="css/style.css" rel="stylesheet">
-		<!-- Bootstrap stylesheets-->
-		<link href="css/bootstrap.css" rel="stylesheet">
-		<!--<link href="css/bootstrap-responsive.css" rel="stylesheet">-->
-		<!-- NOTE: there are more specific bootstrap css files we can get and js files too - ask Xan-->		
-	</head>
-	<!--======================================= -->
-	<!--======================================= -->
-
 
 	<body>
 	
@@ -138,7 +97,6 @@
 			$('#btnTab a:last').tab('show'); // Select last tab
 			$('#btnTab li:eq(2) a').tab('show'); // Select third tab (0-indexed)
 		</script>
-
 
 
 

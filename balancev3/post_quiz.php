@@ -17,9 +17,9 @@
 		$quizIsComplete = True;
 		for ($i=1; $i<=$numQuestions; $i++)
 		{
-			$econVal = $_POST["econRadios".(string)$i.""];
-			$socVal = $_POST["socRadios".(string)$i.""];
-			
+			$econVal = $_POST["econ".(string)$i.""];
+			$socVal = $_POST["soc".(string)$i.""];
+
 			if ($econVal == '') {
 				echo "You have not completed fiscal question #".((string)$i)."<br/>"; // This will only show up in the post_quiz.php page which is loaded briefly before redirecting to profile.php?quiz_results page. To see this, comment out the window.location code at the bottom.
 				$quizIsComplete = False;

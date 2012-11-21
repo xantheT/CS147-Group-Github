@@ -8,8 +8,7 @@
           <span class="navbarText brand">
           <!-- back button--> 
           	<a href="javascript:history.go(-1)"><img src="img/icons/back.png" class="backBtn"></a>
-          	<!--be<img src="img/icons/scales.png" class="banner"/>-->balance</span>
-          <!-- Place back button here??? <a class="" href="#"></a>-->
+          	balance</span>
           <div class="nav-collapse collapse" style="height: 0px; ">
             <ul class="nav headerList">
               <li class="">
@@ -17,7 +16,7 @@
                 <a href="javascript:document.location.reload();"><i class="icon-repeat icon-white"></i>reload</a>
               </li>
               <li class=<?php echo $home;?>>
-                <a href="./index.php"><i class="icon-home icon-white"></i>home</a>
+                <a href="./index.php"><i class="icon-home icon-white"></i>home</a> <!-- CHANGE THIS BACK TO MOBILE.PHP AFTER A/B/ TEST-->
               </li>
               <li class=<?php echo $search;?>>
                 <a href="./search.php"><i class="icon-search icon-white"></i>search</a>

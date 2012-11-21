@@ -15,13 +15,12 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container">
-			<!-- back button--> 
-          	<p>
-          		<a href="javascript:history.go(-1)"><img src="img/icons/back.png" class="topBackBtn"></a>
-          		<a href="#" rel="popover" data-content="Please do not give us sensitive information. We cannot gurantee perfect site security at this time." data-placement="bottom" class="topInfoBtn"><img src="img/icons/info.png"> </a>
-          		<!-- NB: the info icon is from creative commons: http://www.iconfinder.com/icondetails/63436/128/information_icon-->
-          	<br /></p>
-			<h1><img src="img/logo.png" class="logo splash"> Balance</h1>
+			<!-- little header part--> 
+          	<?php 
+			$title = "";
+			include "reg_log_navbar.php";
+			?>
+
 			<div data-role="content">
 
 			<?php 
@@ -30,18 +29,16 @@
 				   echo '<div class="alert alert-error">Oops, we could not find you in our system. Please try again.</div>';
 				}
 			?>
-		
+			<br />
 			<form id="form" action="post_login.php" method="post">
 				<div data-role="fieldcontain">
-			     <label for="foo">Username:</label>
-			     <input type="text" name="username" id="username" value="" autocapitalize="off" />
+			     <input type="text" name="username" id="username" value="" autocapitalize="off" placeholder="Username..."/>
 				</div>
 				<div data-role="fieldcontain">
-			     <label for="foo">Password:</label>
-			     <input type="password" name="password" id="pwd" value=""  />
+			     <input type="password" name="password" id="pwd" value=""  placeholder="Password..."/>
 				</div>
-				
-				<button class="btn btn-info" type="submit" data-theme="b" name="submit" value="submit-value">Log in</button>
+				<br />
+				<div class="btn-center"><button class="btn btn-large btn-info" type="submit" data-theme="b" name="submit" value="submit-value">Log in</button></div>
 			</form>
 			<a class="plain" href="mailto:sax@balance.com?Subject=Uh oh!&body=Eek, please help me, I forgot my password.">Forgot password?</a>
 			<br><br>

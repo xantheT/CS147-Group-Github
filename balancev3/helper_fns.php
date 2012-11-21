@@ -38,40 +38,6 @@ function time_ago($date,$granularity=2) {
 //that will represent that story in a list of thumbnail stories... ie. on the home page, search results, profile.
 function output_story_brief($row){
 
-
-            //This bit adds some color to the  label for the fiscal and social scale!!!
-        //get the number in our db then assign to C (>50) or L (<50)
-        //Then use the num to give the scale value a % strength for either c or l
-        //Where 100% L = 0 in the db, 50% L = 25 in db,
-        // 50% C = 75 in the db, 100%C = 100 in db. 
-                if ($row["fiscal_scale"] > 50) {
-                    $fiscString = "class= 'label label-important'"; //displays red
-                    $fNum = (($row["fiscal_scale"] - 50)/50) *100;   
-                    $fiscLabel = "% Cons.";
-                } elseif ($row["fiscal_scale"]  == 50) { //this case should be fairly rare... I think
-                    $fiscString = "class = 'label'"; //displays grey
-                    $fNum = "";
-                    $fiscLabel = "0%";
-                } else {  //LIBERAL
-                    $fiscString = "class= 'label label-info'"; //displays blue
-                    $fNum = (50-($row["fiscal_scale"]))*2;
-                    $fiscLabel = "% Lib.";
-                }
-
-                if ($row["social_scale"] > 50) {
-                    $socString = "class= 'label label-important'"; //displays red
-                    $sNum = (($row["social_scale"] - 50)/50) *100;
-                    $socLabel = "% Cons.";
-                } elseif ($row["social_scale"] == 50) {
-                    $socString = "class = 'label'"; //displays grey
-                    $sNum = "";
-                    $socLabel = "0%";
-                } else { //LIBERAL
-                    $socString = "class= 'label label-info'"; //displays blue
-                    $sNum = (50 -($row["social_scale"]))*2;
-                    $socLabel = "% Lib.";
-                }
-
         $date = time_ago($row["time"]); //this calls fn to sanitize the timestamp to 'ago' format
 
         //compile html output for the story in its list format
@@ -83,8 +49,8 @@ function output_story_brief($row){
         $html_output.= $row["title"];
         $html_output.= "<br/>";
         $html_output.= "<p class=\"muted small\">".$row["source"]." - ".$date."<br />";
-        $html_output.= "<span ".$socString.">S: ".$sNum.$socLabel."</span> ";
-        $html_output.= "<span ".$fiscString.">F: ".$fNum.$fiscLabel."</span>  ";
+        $html_output.= get_social_score_html_ARRAY($row)." ";
+        $html_output.= get_fiscal_score_html_ARRAY($row)."  ";
         $html_output.= "<i class=\"icon-chevron-right\"></i>";
         $html_output.= "</p>";
         $html_output.= "</a></div>";
@@ -93,40 +59,9 @@ function output_story_brief($row){
     return $html_output;
 }
 
-
+//Takes in a db row (must be a story object from the db) and returns the string of html
+//that will represent the main story on the home page - the one that comes first, with the bigger pic
 function output_main_story_brief($row){
-        //This bit adds some color to the  label for the fiscal and social scale!!!
-        //get the number in our db then assign to C (>50) or L (<50)
-        //Then use the num to give the scale value a % strength for either c or l
-        //Where 100% L = 0 in the db, 50% L = 25 in db,
-        // 50% C = 75 in the db, 100%C = 100 in db. 
-                if ($row["fiscal_scale"] > 50) {
-                    $fiscString = "class= 'label label-important'"; //displays red
-                    $fNum = (($row["fiscal_scale"] - 50)/50) *100;   
-                    $fiscLabel = "% Cons.";
-                } elseif ($row["fiscal_scale"]  == 50) { //this case should be fairly rare... I think
-                    $fiscString = "class = 'label'"; //displays grey
-                    $fNum = "";
-                    $fiscLabel = "0%";
-                } else {  //LIBERAL
-                    $fiscString = "class= 'label label-info'"; //displays blue
-                    $fNum = (50-($row["fiscal_scale"]))*2;
-                    $fiscLabel = "% Lib.";
-                }
-
-                if ($row["social_scale"] > 50) {
-                    $socString = "class= 'label label-important'"; //displays red
-                    $sNum = (($row["social_scale"] - 50)/50) *100;
-                    $socLabel = "% Cons.";
-                } elseif ($row["social_scale"] == 50) {
-                    $socString = "class = 'label'"; //displays grey
-                    $sNum = "";
-                    $socLabel = "0%";
-                } else { //LIBERAL
-                    $socString = "class= 'label label-info'"; //displays blue
-                    $sNum = (50 -($row["social_scale"]))*2;
-                    $socLabel = "% Lib.";
-                }
 
         $date = time_ago($row["time"]); //this calls fn to sanitize the timestamp to 'ago' format
 
@@ -139,58 +74,110 @@ function output_main_story_brief($row){
         $html_output .= "<div class=\"mainStory-caption\">";
         $html_output .= "<p>".$row["title"]."</p>";
         $html_output.= "<span class=\"muted small\">".$row["source"]." - ".$date." ago <br />";
-        $html_output.= "<span ".$socString.">S: ".$sNum.$socLabel."</span> ";
-        $html_output.= "<span ".$fiscString.">F: ".$fNum.$fiscLabel."</span>  ";
+        $html_output.= get_social_score_html_ARRAY($row)." ";
+        $html_output.= get_fiscal_score_html_ARRAY($row)."  ";
         $html_output.= "<i class=\"icon-chevron-right icon-white\"></i>";
         $html_output.= "</span></div></div></a></div></div>";
 
     return $html_output;
-
 }
 
 
-//Takes in a db row and returns the string of html for the two <span>s that
-// will represent the two %'s for the fiscal and social score of the given object (user or story)
-function get_percentage_labels_span($row)
+
+
+//Takes in a db row and returns the string of html for the fiscal score label
+function get_fiscal_score_html($row)
 {
-        //This bit adds some color to the  label for the fiscal and social scale!!!
-        //get the number in our db then assign to C (>50) or L (<50)
-        //Then use the num to give the scale value a % strength for either c or l
-        //Where 100% L = 0 in the db, 50% L = 25 in db,
-        // 50% C = 75 in the db, 100%C = 100 in db. 
-                if ($row->fiscal_scale > 50) {
-                    $fiscString = "class= 'label label-important'"; //displays red
-                    $fNum = (($row->fiscal_scale - 50)/50) *100;   
-                    $fiscLabel = "% Cons.";
-                } elseif ($row->fiscal_scale  == 50) { //this case should be fairly rare... I think
+            if ($row->fiscal_scale > 75) {
+                    $fiscString = "class= 'label label-cons'"; //displays red
+                    $fiscLabel = "Conservative";
+                } elseif (($row->fiscal_scale >= 40) && ($row->fiscal_scale <= 60)) { //this case should be fairly rare... I think
                     $fiscString = "class = 'label'"; //displays grey
-                    $fNum = "";
-                    $fiscLabel = "0%";
-                } else {  //LIBERAL
-                    $fiscString = "class= 'label label-info'"; //displays blue
-                    $fNum = (50-($row->fiscal_scale))*2;
-                    $fiscLabel = "% Lib.";
+                    $fiscLabel = "Moderate";
+                } elseif ($row->fiscal_scale < 25) { //this case should be fairly rare... I think
+                    $fiscString = "class= 'label label-lib'"; //displays grey
+                    $fiscLabel = "Liberal";
+                } elseif (($row->fiscal_scale >= 25) && ($row->fiscal_scale < 40)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-lib'"; //displays grey
+                    $fiscLabel = "Liberal";
+                } elseif (($row->fiscal_scale > 60)&&($row->fiscal_scale <= 75)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-cons'"; //displays grey
+                    $fiscLabel = "Conservative";
                 }
-
-                if ($row->social_scale > 50) {
-                    $socString = "class= 'label label-important'"; //displays red
-                    $sNum = (($row->social_scale - 50)/50) *100;
-                    $socLabel = "% Cons.";
-                } elseif ($row->social_scale == 50) {
-                    $socString = "class = 'label'"; //displays grey
-                    $sNum = "";
-                    $socLabel = "0%";
-                } else { //LIBERAL
-                    $socString = "class= 'label label-info'"; //displays blue
-                    $sNum = (50 -($row->social_scale))*2;
-                    $socLabel = "% Lib.";
-                }
-
-        $html_output = "<span ".$socString.">S: ".$sNum.$socLabel."</span> ";
-        $html_output.= "<span ".$fiscString.">F: ".$fNum.$fiscLabel."</span>";
-        return $html_output;
+        return "<span ".$fiscString."><img src='img/icons/pricetag.png' class='scoreImgPrice'>".$fiscLabel."</span>";
 }
 
+//Takes in a db row and returns the string of html for the social score label
+function get_social_score_html($row)
+{
+            if ($row->social_scale > 75) {
+                    $socString = "class= 'label label-cons'"; //displays red
+                    $socLabel = "Conservative";
+                } elseif (($row->social_scale >= 40) && ($row->social_scale <= 60)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label'"; //displays grey
+                    $socLabel = "Moderate";
+                } elseif ($row->social_scale < 25) { //this case should be fairly rare... I think
+                    $socString = "class= 'label label-lib'"; //displays grey
+                    $socLabel = "Liberal";
+                } elseif (($row->social_scale >= 25) && ($row->social_scale < 40)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-lib'"; //displays grey
+                    $socLabel = "Liberal";
+                } elseif (($row->social_scale > 60)&&($row->social_scale <= 75)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-cons'"; //displays grey
+                    $socLabel = "Conservative";
+                }                
+    return "<span ".$socString."><img src='img/icons/group.png' class='scoreImgGroup'>".$socLabel."</span>";
+}
+
+//Takes in a db row and returns the string of html for the fiscal score label
+//NB: does this for objects that have to be accessed via the array notation and not -> notation
+function get_social_score_html_ARRAY($row)
+{
+            if ($row['social_scale'] > 75) {
+                    $socString = "class= 'label label-cons'"; //displays red
+                    $socLabel = "Conservative";
+                } elseif (($row['social_scale'] >= 40) && ($row['social_scale'] <= 60)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label'"; //displays grey
+                    $socLabel = "Moderate";
+                } elseif ($row['social_scale'] < 25) { //this case should be fairly rare... I think
+                    $socString = "class= 'label label-lib'"; //displays grey
+                    $socLabel = "Liberal";
+                } elseif (($row['social_scale'] >= 25) && ($row['social_scale'] < 40)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-lib'"; //displays grey
+                    $socLabel = "Liberal";
+                } elseif (($row['social_scale'] > 60)&&($row['social_scale'] <= 75)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-cons'"; //displays grey
+                    $socLabel = "Conservative";
+                }                
+    return "<span ".$socString."><img src='img/icons/group.png' class='scoreImgGroup'>".$socLabel."</span>";
+}
+
+
+//Takes in a db row and returns the string of html for the social score label
+//NB: does this for objects that have to be accessed via the array notation and not -> notation
+function get_fiscal_score_html_ARRAY($row)
+{
+            if ($row['fiscal_scale'] > 75) {
+                    $fiscString = "class= 'label label-cons'"; //displays red
+                    $fiscLabel = "Conservative";
+                } elseif (($row['fiscal_scale'] >= 40) && ($row['fiscal_scale'] <= 60)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label'"; //displays grey
+                    $fiscLabel = "Moderate";
+                } elseif ($row['fiscal_scale'] < 25) { //this case should be fairly rare... I think
+                    $fiscString = "class= 'label label-lib'"; //displays grey
+                    $fiscLabel = "Liberal";
+                } elseif (($row['fiscal_scale'] >= 25) && ($row['fiscal_scale'] < 40)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-lib'"; //displays grey
+                    $fiscLabel = "Liberal";
+                } elseif (($row['fiscal_scale'] > 60)&&($row['fiscal_scale'] <= 75)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-cons'"; //displays grey
+                    $fiscLabel = "Conservative";
+                }
+        return "<span ".$fiscString."><img src='img/icons/pricetag.png' class='scoreImgPrice'>".$fiscLabel."</span>";
+}
+
+
+//queries the current user who is logged in. Acesses this via the session info that we store
 function getCurrUser()
 {
     include("config.php");
@@ -199,6 +186,18 @@ function getCurrUser()
     $result = mysql_query($query);  // Perform Query
     return mysql_fetch_object($result);  //get user object
 }
+
+
+//given an id parameter, queries the db to get the story object that matches that id
+function getCurrStory($id)
+{
+    include("config.php");
+    $query = sprintf("SELECT * FROM balance_stories WHERE id = %d",
+        mysql_real_escape_string($id)); //constructs query
+    $result = mysql_query($query);  // Perform Query
+    return mysql_fetch_object($result);  //get story object
+}
+
 
 
 ?>

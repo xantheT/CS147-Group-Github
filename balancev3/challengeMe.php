@@ -24,6 +24,10 @@
       echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
     }
   }
+  if ($outputs == 0) { //we have nothing to recommend or they have read all recommendations
+          echo "<p class='muted'>You're up to date on all of the stories that differ from your views.
+            Why don't you try something new? Start balancing - read a random story by clicking <img src='img/logo.png' class='minilogo'> below. </p>";
+  }
 ?>
 
 

@@ -15,38 +15,33 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container">
-			<!-- little header part-->
-			<a href="javascript:history.go(-1)"><img src="img/icons/back.png" class="topBackBtn"></a>
-          	<a href="#" rel="popover" data-content="Please do not give us sensitive information. We cannot gurantee perfect site security at this time." data-placement="bottom" class="topInfoBtn"><img src="img/icons/info.png"> </a>
-          	<!-- NB: the info icon is from creative commons: http://www.iconfinder.com/icondetails/63436/128/information_icon-->
-          	<br /></p>
-			<h1><img src="img/logo.png" class="logo splash"> Balance</h1>
+			<?php 
+			$title = "";
+			include "reg_log_navbar.php";
+			?>
 
 			<div data-role="content">
 		
-		<!-- Random Submit Action Specified for this Form But Not Created Yet. Ideally want to post to database -->
+
 				<form action="post_register.php" method="post" id="register"><fieldset>
+
 					<legend>Register</legend>
-					
 					<div class="control-group">
-				     	<label class="control-label" for="username">Username:</label>
 				     	<div class="controls">
-				     	<input type="text" name="username" id="username" value=""  />
+				     	<input type="text" name="username" id="username" value="" placeholder="Username..." />
 						</div>
 					</div>
 					
 					<div class="control-group">
-					     <label class="control-label" for="password1">Password:</label>
 					     <div class="controls">
-					     <input type="password" name="password1" id="password1" value=""  />
+					     <input type="password" name="password1" id="password1" value="" placeholder="Password..." />
 					     </div>
 					</div>
 
 				     <!-- Consider asking for PASSWORD RETYRPE!!!-->
 				     <div class="control-group">
-					     <label class="control-label" for="password2">Retype password:</label>
 					     <div class="controls">
-					     <input type="password" name="password2" id="password2" value=""  />
+					     <input type="password" name="password2" id="password2" value=""  placeholder="Retype password..."/>
 						 </div>
 					</div>
 					
@@ -57,48 +52,60 @@
 				     <input type="text" name="name" id="foo" value=""  />
 				      -->
 					<div class="control-group">
-				     	<label class="control-label" for="email">Email Address:</label>
 				     	<div class="controls">
-				     	<input type="text" name="email" id="email" value=""  />
+				     	<input type="text" name="email" id="email" value=""  placeholder="Email..."/>
 						</div>
 					</div>
-				
-				    <legend>I Identify As Socially:</legend>
-				         	
-				    <label class="radio" for="socPrefC">Conservative 
-				    	<input type="radio" name="socPref" id="socPrefC" value="c" />
-				    </label>
-				    <label class="radio" for="socPrefL">Liberal
-				    	<input type="radio" name="socPref" id="socPrefL" value="l" />
-				    </label>
+					<br />
+					<div class="btn-center"><button class="btn btn-large btn-info" type="submit" data-theme="a">Register</button></div>
+					<br />
+
+				<!--====================================== -->
+				<!--======= Moved stuff below to next page in line with the notion of escalation of commitment =========== -->
+				<!--
+				    <legend>I Identify As Socially:</legend>     	
+				   <div class="btn-group"  data-toggle="buttons-radio">
+ 					 	<button type="button" value="l" class="btn btn-large btn-block" name="soc">Liberal</button>
+ 					 	<button type="button" value="m" class="btn btn-large btn-block" name="soc">Moderate</button>
+ 					 	<button type="button" value="c" class="btn btn-large btn-block" name="soc">Conservative</button>
+ 					 	<input type="hidden" name="socPref" id="socPref" value="" />
+					</div>
+
 
 				    
 				    <legend>I Identify As Fiscally:</legend>
-				    <label class="radio" for="fiscPrefC">Conservative
-				    	<input type="radio" name="fiscPref" id="fiscPrefC" value="c" />
-				    </label>
-				    <label class="radio" type="radio" for="fiscPrefL">Liberal
-				    	<input type="radio" name="fiscPref" id="fiscPrefL" value="l" />
-				    </label>
+				   	<div class="btn-group"  data-toggle="buttons-radio">
+ 					 	<button type="button" value="l" class="btn btn-large btn-block" name="fisc">Liberal</button>
+ 					 	<button type="button" value="m" class="btn btn-large btn-block" name="fisc">Moderate</button>
+ 					 	<button type="button" value="c" class="btn btn-large btn-block" name="fisc">Conservative</button>
+ 					 	<input type="hidden" name="fiscPref" id="fiscPref" value="" />
+					</div>
 				    <br>
-				   	<button class="btn btn-info" type="submit" data-theme="a">Register</button>
+				   
+				   ==========END OF MOVED STUFF============-->
+				
+
 				</fieldset>
 				</form>
-
-				
-			</div>
-		
-		
-		
+			</div>	
 		</div>
 
 		
+
+
 		<!-- JAVASCRIPT -->
 		<script type="text/javascript">
 		$("a").click(function (event) {
 		    event.preventDefault();
 		    window.location = $(this).attr("href");
 		});
+
+
+		$('form').submit(function() {
+		    document.getElementById('fiscPref').value = $('button[name="fisc"].active').val();
+			document.getElementById('socPref').value = $('button[name="soc"].active').val();
+		});
+
 		</script>
 
 		<!-- JAVASCRIPT -->
@@ -141,7 +148,7 @@
 				password1:{required:true},
 				password2:{required:true,equalTo: "#password1"},
 				socPref:"required",
-				fiscPref:"required",
+				fiscP:"required",
 				},
 
 				messages:{
@@ -155,12 +162,6 @@
 				password2:{
 					//required:"Enter confirm password",
 					equalTo:"Both passwords must match"},		
-				},
-				socPref:{
-					socPref:"Please select one"
-				},
-				fiscPref:{
-					socPref:"Please select one"
 				},
 
 				errorClass: "help-inline",

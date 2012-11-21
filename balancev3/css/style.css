@@ -28,11 +28,39 @@
 .footer li {
 	width: 20%;
 	text-align: center;
+	line-height: 50px;
 }
 
+.thumbsUp {
+	margin-top: -9px;
+	width: 20%;
+	text-align: center;
+}
+
+.thumbsDown {
+	margin-top: -5px;
+	width: 20%;
+	text-align: center;
+}
+
+
 .logo {
-	width: 30px;
-	height: 30px;
+	width: 46px;
+	height: 46px;
+}
+
+.hiddenLogo {
+	width: 20px;
+	height: 20px;
+	visibility: hidden;
+}
+
+.footLogo {
+	position: fixed;
+	height: 50px;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
 }
 
 .minilogo {
@@ -81,32 +109,38 @@ p .muted .small {
 
 .topBackBtn {
 	float: left;
-	width:12px;
-	height: 12px;
+	width:20px;
+	height: 20px;
 	padding-top: 5px;
 }
 
 .topInfoBtn {
 	float: right;
-	padding-right: 60px;
+	position: relative;
 	vertical-align: top;
-	width:20px;
-	height: 20px;
+	width:22px;
+	height: 22px;
+	margin-top: 5px;
 }
 
 
 .headerList li {
 	width: 100%;
+	font-size: 18px;
+	line-height: 24px;
 }
 
 .headerList li i {
 	padding-right: 10px;
+	vertical-align: middle;
+	width: 15px;
+	height: 20px;
 }
 
 
 
 
-/* For the main story at top of hoe page */
+/* For the main story at top of home page */
 .mainStory {
 	position: relative;
 	margin-bottom: 5px;
@@ -140,6 +174,47 @@ p .muted .small {
 }
 
 
+.btn-center {
+	text-align: center;
+}
+
+#huge1 {
+	font-size: 20px;
+}
+
+#huge2 {
+	font-size: 20px;
+}
+
+
+.logoQuiz {
+	width: 25px;
+	height: 25px;
+	float: right;
+}
+
+.backBtnQuiz {
+	float: left;
+	width: 20px;
+	height: 20px;
+	padding-top: 0px;
+}
+
+.scoreImgPrice {
+	width: 20px;
+	height: 20px;
+	padding-right: 1px;
+	vertical-align: center;
+}
+
+.scoreImgGroup {
+	width: 15px;
+	height: 12px;
+	padding-right: 3px;
+	vertical-align: center;
+}
+
+
 /* Stuff for the d3 graph*/
 .axis text {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -155,8 +230,20 @@ p .muted .small {
 .dot {
 	stroke: red;
 	fill: blue;
+	opacity: 0.6;
 }
 
+.typeLabel {
+	fill: gray;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.backDot {
+	stroke: gray;
+	fill: gray;
+	opacity: 0.2;
+}
 
 
 

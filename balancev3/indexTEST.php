@@ -14,7 +14,8 @@
 <!-- SESSION: ABOVE MUST BE PLACED AT VERY BEGINNING OF FILE BEFORE ANYTHING GET'S OUTPUTTED TO BROWSER -->
 
 
-
+<!--=============This is our optimizeley test page ========================== -->
+<!--=====================see also, 'challengeMeTEST.php for format changes================== -->
 
 
 <!DOCTYPE html>
@@ -68,12 +69,12 @@
 		include("banner.php");
 		?>
 
-
+		<!-- NOTE DIFF NAMES -->
         <div class="container firstOffset">
 	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab">
 	  			<a href="#trending" class="btn active">Trending</a>
-	  			<a href="#you" class="btn">For you</a>
-	 			<a href="#challenge" class="btn">Challenge me</a>
+	  			<a href="#you" class="btn">Similar views</a>
+	 			<a href="#challenge" class="btn">Other views</a>
 			</div>
 		</div>
 
@@ -96,7 +97,7 @@
               <div class="tab-pane fade" id="challenge">
               	<?php
 				//partial for the trending news results
-				include("challengeMe.php");
+				include("challengeMeTEST.php");
 				?>
               </div>
             </div>

@@ -968,7 +968,7 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   display: inline-block;
-  height: 20px;
+  height: 30px;         /*CHANGED HERE! */
   padding: 4px 6px;
   margin-bottom: 9px;
   font-size: 14px;
@@ -982,7 +982,7 @@ input[type="color"],
 input,
 textarea,
 .uneditable-input {
-  width: 206px;
+  width: 90%;       /*CHANGED HERE! */
 }
 
 textarea {
@@ -4203,7 +4203,7 @@ input[type="submit"].btn.btn-mini {
   font-size: 18px;
   font-weight: 200;
   color: #777777;
-  text-shadow: 0 1px 0 #ffffff;
+  /*text-shadow: 0 1px 0 #ffffff;     CHANGED*/
 }
 
 .navbar .brand:hover {
@@ -4583,7 +4583,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
   color: #999999;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);  CHANGED*/
 }
 
 .navbar-inverse .brand:hover,
@@ -5344,6 +5344,28 @@ a.badge:hover {
 .label-info,
 .badge-info {
   background-color: #3a87ad;
+}
+
+/* INSERTED/CHANGED my stuff here */
+.label-lib,
+.badge-lib {
+  background-color: #2B8CBE;
+}
+
+.label-mod-cons,
+.badge-mod-cons {
+  background-color: #C58988;
+}
+
+.label-cons,
+.badge-cons {
+  background-color: #B94A48;
+}
+
+
+.label-mod-lib,
+.badge-mod-lib {
+  background-color: #A6BDDB;
 }
 
 .label-info[href],
