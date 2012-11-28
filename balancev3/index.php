@@ -17,6 +17,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html>
 	<?php
@@ -70,7 +72,7 @@
 
 
         <div class="container firstOffset">
-	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab">
+	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab" style="text-align: center;">
 	  			<a href="#trending" class="btn active">Trending</a>
 	  			<a href="#you" class="btn">For you</a>
 	 			<a href="#challenge" class="btn">Challenge me</a>
@@ -78,6 +80,11 @@
 		</div>
 
         <div class="container">
+        <?php 
+	        include("config.php");
+	        $user = getCurrUser();
+        	echo displayUserScore($user);
+        ?>
         	<div id="myTabContent" class="tab-content">
               <div class="tab-pane fade active in" id="trending">
               	

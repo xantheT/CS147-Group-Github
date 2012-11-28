@@ -13,6 +13,12 @@
 	//'head.php' includes all header information for all of our pages
 	// ie. everything that lives within <head>...info..</head> 
 	include("head.php");
+	$strongly_agree_text = "Strongly Agree";
+	$agree_text = "Agree";
+	$neutral_text = "Neutral";
+	$disagree_text = "Disagree";
+	$strongly_disagree_text = "Strongly Disagree";
+
 	?>
 
 <body>
@@ -31,11 +37,11 @@
 				<div id="1">
 				    <h4>Q1. Controlling inflation is more important than controlling unemployment.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="1">Strongly agree</button>
- 					 	<button type="button" value="30" class="btn btn-large btn-block" name="1">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="1">Uncommitted</button>
- 					 	<button type="button" value="70" class="btn btn-large btn-block" name="1">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="1">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="1"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="30" class="btn btn-large btn-block" name="1"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="1"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="70" class="btn btn-large btn-block" name="1"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="1"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ1" id="econ1" value="50" />
  						<br />
@@ -46,11 +52,11 @@
  				<div id="2" class="hide">
 				    <h4>Q2. Abortion should be illegal.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="2">Strongly agree</button>
- 					 	<button type="button" value="80" class="btn btn-large btn-block" name="2">Agree</button>
- 					 	<button type="button" value="40" class="btn btn-large btn-block" name="2">Uncommitted</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="2">Disagree</button>
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="2">Strongly disagree</button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="2"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="80" class="btn btn-large btn-block" name="2"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="40" class="btn btn-large btn-block" name="2"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="2"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="2"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc1" id="soc1" value="50" />
  						<br />
@@ -60,11 +66,11 @@
  				<div id="3" class="hide">
 				    <h4>Q3. Because corporations cannot be trusted to voluntarily protect the environment, they require regulation.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="3">Strongly agree</button>
- 					 	<button type="button" value="30" class="btn btn-large btn-block" name="3">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="3">Uncommitted</button>
- 					 	<button type="button" value="70" class="btn btn-large btn-block" name="3">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="3">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="3"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="30" class="btn btn-large btn-block" name="3"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="3"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="70" class="btn btn-large btn-block" name="3"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="3"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ2" id="econ2" value="50" />
  						<br />
@@ -75,11 +81,11 @@
  				<div id="4" class="hide">
 				    <h4>Q4. It is wrong to enforce moral behavior through the law because this infringes upon an individual's freedom.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="4">Strongly agree</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="4">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="4">Uncommitted</button>
- 					 	<button type="button" value="70" class="btn btn-large btn-block" name="4">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="4">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="4"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="4"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="4"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="70" class="btn btn-large btn-block" name="4"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="4"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc2" id="soc2" value="50" />
  						<br />
@@ -87,13 +93,13 @@
  				</div>
 
  				 <div id="5" class="hide">
-				    <h4>Q5. First-generation immigrants can fully integrate within their new country.</h4>
+				    <h4>Q5. First-generation immigrants should not be required to fully integrate within their new country.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="5">Strongly agree</button>
- 					 	<button type="button" value="70" class="btn btn-large btn-block" name="5">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="5">Uncommitted</button>
- 					 	<button type="button" value="30" class="btn btn-large btn-block" name="5">Disagree</button>
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="5">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="5"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="30" class="btn btn-large btn-block" name="5"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="5"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="70" class="btn btn-large btn-block" name="5"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="5"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc3" id="soc3" value="50" />
  						<br />
@@ -104,11 +110,11 @@
  				<div id="6" class="hide">
 				    <h4>Q6. "From each according to his ability, to each according to his need" is a fundamentally good idea.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="6">Strongly agree</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="6">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="6">Uncommitted</button>
- 					 	<button type="button" value="80" class="btn btn-large btn-block" name="6">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="6">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="6"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="6"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="6"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="80" class="btn btn-large btn-block" name="6"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="6"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ3" id="econ3" value="50" />
  						<br />
@@ -118,11 +124,11 @@
  				 <div id="7" class="hide">
 				    <h4>Q7. Taxpayers should not prop up any theatres or museums that cannot survive on a commercial basis.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="7">Strongly agree</button>
- 					 	<button type="button" value="80" class="btn btn-large btn-block" name="7">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="7">Uncommitted</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="7">Disagree</button>
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="7">Strongly disagree</button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="7"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="80" class="btn btn-large btn-block" name="7"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="7"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="7"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="7"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc4" id="soc4" value="50" />
  						<br />
@@ -132,11 +138,11 @@
  				<div id="8" class="hide">
 				    <h4>Q8. Good parents sometimes have to spank their children.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="8">Strongly agree</button>
- 					 	<button type="button" value="70" class="btn btn-large btn-block" name="8">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="8">Uncommitted</button>
- 					 	<button type="button" value="30" class="btn btn-large btn-block" name="8">Disagree</button>
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="8">Strongly disagree</button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="8"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="70" class="btn btn-large btn-block" name="8"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="8"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="30" class="btn btn-large btn-block" name="8"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="8"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc5" id="soc5" value="50" />
  						<br />
@@ -147,11 +153,11 @@
  				<div id="9" class="hide">
 				    <h4>Q9. Land shouldn't be a commodity to be bought and sold.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="9">Strongly agree</button>
- 					 	<button type="button" value="30" class="btn btn-large btn-block" name="9">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="9">Uncommitted</button>
- 					 	<button type="button" value="70" class="btn btn-large btn-block" name="9">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="9">Strongly disagree</button>
+ 					 	<button type="button" value="-10" class="btn btn-large btn-block" name="9"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="9"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="9"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="60" class="btn btn-large btn-block" name="9"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="80" class="btn btn-large btn-block" name="9"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ4" id="econ4" value="50" />
  						<br />
@@ -161,11 +167,11 @@
  				<div id="10" class="hide">
 				    <h4>Q10. Access to healthcare is a right.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="10">Strongly agree</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="10">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="10">Uncommitted</button>
- 					 	<button type="button" value="80" class="btn btn-large btn-block" name="10">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="10">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="10"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="10"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="10"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="80" class="btn btn-large btn-block" name="10"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="10"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc8" id="soc8" value="50" />
  						<br />
@@ -175,11 +181,11 @@
  				 <div id="11" class="hide">
 				    <h4>Q11. There is a need for stricter gun laws.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="11">Strongly agree</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="11">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="11">Uncommitted</button>
- 					 	<button type="button" value="70" class="btn btn-large btn-block" name="11">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="11">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="11"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="11"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="11"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="70" class="btn btn-large btn-block" name="11"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="11"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc6" id="soc6" value="50" />
  						<br />
@@ -189,11 +195,11 @@
  				 <div id="12" class="hide">
 				    <h4>Q12. Protectionism is sometimes necessary in trade.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="12">Strongly agree</button>
- 					 	<button type="button" value="60" class="btn btn-large btn-block" name="12">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="12">Uncommitted</button>
- 					 	<button type="button" value="40" class="btn btn-large btn-block" name="12">Disagree</button>
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="12">Strongly disagree</button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="12"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="60" class="btn btn-large btn-block" name="12"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="12"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="40" class="btn btn-large btn-block" name="12"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="12"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ5" id="econ5" value="50" />
  						<br />
@@ -203,11 +209,11 @@
  				 <div id="13" class="hide">
 				    <h4>Q13. The only social responsibility of a company should be to deliver a profit to its shareholders.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="13">Strongly agree</button>
- 					 	<button type="button" value="85" class="btn btn-large btn-block" name="13">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="13">Uncommitted</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="13">Disagree</button>
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="13">Strongly disagree</button>
+ 					 	<button type="button" value="110" class="btn btn-large btn-block" name="13"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="85" class="btn btn-large btn-block" name="13"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="13"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="13"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="13"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ6" id="econ6" value="50" />
  						<br />
@@ -218,11 +224,11 @@
  				<div id="14" class="hide">
 				    <h4>Q14. Government should ensure that all citizens meet a certain minimum standard of living.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="14">Strongly agree</button>
- 					 	<button type="button" value="25" class="btn btn-large btn-block" name="14">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="14">Uncommitted</button>
- 					 	<button type="button" value="75" class="btn btn-large btn-block" name="14">Disagree</button>
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="14">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="14"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="25" class="btn btn-large btn-block" name="14"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="14"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="75" class="btn btn-large btn-block" name="14"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="14"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="soc7" id="soc7" value="50" />
  						<br />
@@ -233,11 +239,11 @@
  				<div id="15" class="hide">
 				    <h4>Q15. The rich should be taxed at a higher rate than the middle class or poor.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="15">Strongly agree</button>
- 					 	<button type="button" value="20" class="btn btn-large btn-block" name="15">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="15">Uncommitted</button>
- 					 	<button type="button" value="60" class="btn btn-large btn-block" name="15">Disagree</button>
- 					 	<button type="button" value="85" class="btn btn-large btn-block" name="15">Strongly disagree</button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="15"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="15"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="15"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="60" class="btn btn-large btn-block" name="15"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="85" class="btn btn-large btn-block" name="15"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ7" id="econ7" value="50" />
  						<br />
@@ -247,11 +253,11 @@
  				<div id="16" class="hide">
 				    <h4>Q16. Those with the ability to pay should have the right to higher standards of medical care.</h4>
 				   	<div class="btn-group"  data-toggle="buttons-radio">
- 					 	<button type="button" value="100" class="btn btn-large btn-block" name="16">Strongly agree</button>
- 					 	<button type="button" value="75" class="btn btn-large btn-block" name="16">Agree</button>
- 					 	<button type="button" value="50" class="btn btn-large btn-block" name="16">Uncommitted</button>
- 					 	<button type="button" value="35" class="btn btn-large btn-block" name="16">Disagree</button>
- 					 	<button type="button" value="0" class="btn btn-large btn-block" name="16">Strongly disagree</button>
+ 					 	<button type="button" value="100" class="btn btn-large btn-block" name="16"><?php echo $strongly_agree_text ?></button>
+ 					 	<button type="button" value="75" class="btn btn-large btn-block" name="16"><?php echo $agree_text ?></button>
+ 					 	<button type="button" value="50" class="btn btn-large btn-block" name="16"><?php echo $neutral_text ?></button>
+ 					 	<button type="button" value="20" class="btn btn-large btn-block" name="16"><?php echo $disagree_text ?></button>
+ 					 	<button type="button" value="0" class="btn btn-large btn-block" name="16"><?php echo $strongly_disagree_text ?></button>
 
  					 	<input type="hidden" name="econ8" id="econ8" value="50" />
  						<br />

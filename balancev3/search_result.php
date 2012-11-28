@@ -30,73 +30,49 @@
 		include("banner.php");
 		?>
 
+
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container firstOffset">
-			<form class="navbar-search pull-left" action="search_result.php" method="post">
-			<input type="text" name="query" class="search-query" placeholder="Search">
-			<button type="submit" class="btnSearch"><i class="icon-search"></i></button>
+			<form class="form-search searchForm" action="search_result.php" method="post">
+  			   <div class="input-append searchBox">
+			    <input type="text" class="span2 search-query" name="query" placeholder="Search..." value=<?php echo $_POST["query"];?> >
+			    <button type="submit" class="btn searchBtn"><i class="icon-search"></i></button>
+			  </div>
 			</form>
+
 			<!-- Note: minor error is reloading the search_Result.php page from the url without a search query produces errors -->
-			<br><br><br>
+			<!-- Think above worry is fixed now -->
 			<p class="muted"> <!-- Start of container for results-->
-			<br/>
 			<?php
 				$search_query = $_POST["query"];
 				if ($search_query == "") {
 					echo "Begin your search for a story above";
-					exit();
-				}
-				echo "Search results for <strong>\"".$search_query."\"</strong>: <br/><br/>";
-				include("config.php");
-				$sql_query = "SELECT * FROM balance_stories";
-				$result = mysql_query($sql_query);
-				$no_results = true;
-				while ($row = mysql_fetch_assoc($result)) {
-					$pos_title = strpos(strtolower($row["title"]), strtolower($search_query));
-					$pos_source = strpos(strtolower($row["source"]), strtolower($search_query));
-					$pos_text = strpos(strtolower($row["text"]), strtolower($search_query));
-					$pos_url = strpos(strtolower($row["url"]), strtolower($search_query));
-					$pos_keyword = strpos(strtolower($row["keyword"]), strtolower($search_query));
-					
-					if ((!($pos_title === false)) || (!($pos_source === false)) || (!($pos_text === false)) || (!($pos_url === false)) || (!($pos_keyword === false))) { 
-						$no_results = false;
+				} else {
+					include("config.php");
+					$sql_query = "SELECT * FROM balance_stories";
+					$result = mysql_query($sql_query);
+					$no_results = true;
+					while ($row = mysql_fetch_assoc($result)) {
+						$pos_title = strpos(strtolower($row["title"]), strtolower($search_query));
+						$pos_source = strpos(strtolower($row["source"]), strtolower($search_query));
+						$pos_text = strpos(strtolower($row["text"]), strtolower($search_query));
+						$pos_url = strpos(strtolower($row["url"]), strtolower($search_query));
+						$pos_keyword = strpos(strtolower($row["keyword"]), strtolower($search_query));
 						
-						echo output_story_brief($row);//this sneaky little function lives in 'helper_fns.php'
-									// it takes in a row object from the stories db
-									// and outputs full and correct html for the story in list format 
-
-
-							//TESTING SHIT BELOW --
-							// This triple inequality with a bang before it is necessary. don't ask why, i'm not sure. :(
-							/*
-							These are the parameters for our stories database:
-							$row["title"]
-							$row["time"]
-							$row["source"]
-							$row["fiscal_scale"]
-							$row["social_scale"]
-							$row["picture"]
-							$row["text"]
-							$row["url"]
-							$row["keywords"]
-							However, as of now (Sat 11/3) the database doesn't have any pictures or keywords associated. Amit needs to fix these on the google spreadsheet and enter them into phpmyadmin.
-							*/
-							//echo "<strong>Title: ".$row["title"]."</strong><br/>";
-							//echo "Time: ".$row["time"]."<br/>";
-							//echo "Source: ".$row["source"]."<br/>";
-							//echo "Fiscale Scale: ".$row["fiscal_scale"]."<br/>";
-							//echo "Social Scale: ".$row["social_scale"]."<br/>";
-							//echo "Picture Name: ".$row["picture"]."<br/>";
-							//echo "Text: ".$row["text"]."<br/>";
-							//echo "URL: ".$row["url"]."<br/>";
-							//echo "Keywords: ".$row["keywords"]."<br/>";
-							//echo "<br/><br/>";
-		
+						if ((!($pos_title === false)) || (!($pos_source === false)) 
+								|| (!($pos_text === false)) || (!($pos_url === false)) 
+								|| (!($pos_keyword === false))) 
+						{ 
+							$no_results = false;
+							echo output_story_brief($row);//this sneaky little function lives in 'helper_fns.php'
+										// it takes in a row object from the stories db
+										// and outputs full and correct html for the story in list format 
+						}
 					}
+					if ($no_results) {
+							echo "No results found for <strong>\"".$search_query."\"</strong><br/>";
+						}
 				}
-				if ($no_results) {
-						echo "<strong> None of the articles matched your query, \"".$search_query."\"</strong><br/><br/";
-					}
 				?>
 			</p>
 		</div>

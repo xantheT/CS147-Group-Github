@@ -6,40 +6,24 @@
 <!-- SESSION: ABOVE MUST BE PLACED AT VERY BEGINNING OF FILE BEFORE ANYTHING GET'S OUTPUTTED TO BROWSER -->
 
 <?php
-
-//THE MACHINE LEARNING PART THAT MOVES YOU SCORE CLOSER TO AN ARTICLE
-	$normalizer = 50; //NB: this is randomly chose as the normalizer. IS THIS RIGHT???
-
-
-        include "config.php";
-     	$story = getCurrStory($_GET["id"]);
-        $user = getCurrUser();
-
-        //now move the user's scores closer to the article
-        //Soc score
-        $moveScoreBy = ($story->social_scale - $user->social_scale)/$normalizer;
-        $newSocScore = $user->social_scale + $moveScoreBy;
-        //fisc score
-		$moveScoreBy = ($story->fiscal_scale - $user->fiscal_scale)/$normalizer;  
-		$newFiscScore = $user->fiscal_scale + $moveScoreBy;
-
-		//put new score in DB
-       	$query = sprintf("UPDATE balance_users SET fiscal_scale=%d, social_scale=%d WHERE id=%d",
-			mysql_real_escape_string($newFiscScore),
-			mysql_real_escape_string($newSocScore),
-			mysql_real_escape_string($_SESSION['user_id'])
-			);
-		// Actually update db now
-		$result = mysql_query($query);
-
+	include "config.php";
+	//THE MACHINE LEARNING PART THAT MOVES YOU SCORE CLOSER TO AN ARTICLE
+	// the function lives in helper_fns
+	adjustUserScore($_GET["id"]);
+	if ($_GET["page"]=="reload") {
+		$redirect = "history.go(-1);";
+	} elseif ($_GET["page"]=="back") {
+		$redirect = "window.history.go(-2);";  //goes back 2: back to story -> back to page prev to story
+	} else {
+		$redirect = "window.location = './".$_GET["page"].".php';";
+	}
 ?>
 
 <!DOCTYPE html>
 <html>
 <body>
 		<script type="text/javascript">
-			window.location = "./story.php";
+			<?php echo $redirect; ?>
 		</script>
-
 </body>
 </html>

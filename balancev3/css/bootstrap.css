@@ -4399,6 +4399,7 @@ input[type="submit"].btn.btn-mini {
   text-shadow: 0 1px 0 #ffffff;
 }
 
+
 .navbar .nav .dropdown-toggle .caret {
   margin-top: 8px;
 }
@@ -5607,11 +5608,13 @@ a.badge:hover {
 }
 
 .accordion-group {
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   border: 1px solid #e5e5e5;
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 .accordion-heading {

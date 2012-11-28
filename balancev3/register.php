@@ -102,8 +102,9 @@
 
 
 		$('form').submit(function() {
-		    document.getElementById('fiscPref').value = $('button[name="fisc"].active').val();
-			document.getElementById('socPref').value = $('button[name="soc"].active').val();
+		    //left over from when the fom to declare stance was still on this page. We moved it to next page
+		    //document.getElementById('fiscPref').value = $('button[name="fisc"].active').val();
+			//document.getElementById('socPref').value = $('button[name="soc"].active').val();
 		});
 
 		</script>
@@ -138,8 +139,8 @@
 		<!-- Include Bootstrap Asserts JavaScript Files. -->
 		<script type="text/javascript" src="js/jquery.validate.js"></script>
 		<script type="text/javascript">
-		$(document).ready(function(){
-
+		$("#register").submit(function(){
+			
 			// Validation
 			$("#register").validate({
 				rules:{
@@ -147,8 +148,8 @@
 				email:{required:true,email: true},
 				password1:{required:true},
 				password2:{required:true,equalTo: "#password1"},
-				socPref:"required",
-				fiscP:"required",
+				//socPref:"required",
+				//fiscP:"required",
 				},
 
 				messages:{
@@ -176,6 +177,11 @@
 				//$(element).parents('.control-group').addClass('success');
 				}
 			});
+			if(!$("#register").valid()) {
+				return false;
+			} else {
+				return true;
+			}
 		});
 		</script>
 

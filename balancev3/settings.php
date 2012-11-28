@@ -58,7 +58,7 @@
 				    </div>
 				    <div id="collapseTwo" class="accordion-body collapse">
 				      <div class="accordion-inner">
-				        Click <a href="tutorial_pg1.html" id="key" data-icon="custom">here</a> to retake the Balance Tutorial.
+				        Click <a href="tutorial_pg1.php" id="key" data-icon="custom">here</a> to retake the Balance Tutorial.
 				      </div>
 				    </div>
 				  </div>
@@ -66,11 +66,11 @@
 				   <!-- This is the collapse-able Contact Us box -->
 				  <div class="accordion-group">
 				    <div class="accordion-heading">
-				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
 				        Contact Us
 				      </a>
 				    </div>
-				    <div id="collapseTwo" class="accordion-body collapse">
+				    <div id="collapseThree" class="accordion-body collapse">
 				      <div class="accordion-inner">
 				        Please  <a href="mailto:sax@balance.com?Subject=Hello Balance!">
 email us</a> for any suggestions/complaints.
@@ -78,15 +78,20 @@ email us</a> for any suggestions/complaints.
 				    </div>
 				  </div>
 				  
-				   <!-- This is the Logout link -->
+				  <!-- This is the collapse-able Logout box -->
 				  <div class="accordion-group">
-				  		    <div class="accordion-heading">
-				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="./post_logout.php">
-				        Log Out
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+				        Logout
 				      </a>
 				    </div>
-				</div>
-
+				    <div id="collapseFour" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				        Are you sure you want to logout? Click <a href="./post_logout.php">
+here </a> to logout!
+				      </div>
+				    </div>
+				  </div>
 
 				</div>
 

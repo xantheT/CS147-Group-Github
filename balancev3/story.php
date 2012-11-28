@@ -23,8 +23,11 @@
 
 
 		<div class="container firstOffset">
+		
 		<?php
-			include("config.php");
+	        include("config.php");
+	        $user = getCurrUser();
+        	echo displayUserScore($user);
 			//Get the ID from the URL argument after .../story.php?id=x
 			$id = $_GET["id"];
 			
@@ -73,7 +76,7 @@
 			echo "<p><img src=\"".$picture."\" alt=\"alternative text here\"/></p>";
 			// BODY OF STORY
 			echo "<p> ".$text."</p>";
-			echo "<a href=\"".$url."\"><p>Click here to read in full</p></a>";
+			echo "<p><a href=\"".$url."\" target=\"_blank\">Click here to read in full.</a></p>";
 			echo "<br />";
 			
 
@@ -111,10 +114,12 @@
     	================================================== -->
     	<!-- Placed at the end of the document so the pages load faster -->
 		<script type="text/javascript">
+		/* Below exists in all of our pages - something we carried over from RIO
+		BUT it was fucking up the like/dislike stuff so removed it for 'Story.php' only
 		$("a").click(function (event) {
 		    event.preventDefault();
 		    window.location = $(this).attr("href");
-		});
+		}); */
 		</script>
 
 

@@ -10,12 +10,25 @@
       <!-- Alter footer options if viewing a story-->
       <?php if ($story ==false) {
         echo '<ul class="nav footer">
+        <li><a href="#"><!--<i class="icon-share icon-white">--></i></a></li>
+        <li class="thumbsUp"><div id="like" style="visibility:hidden;"><img src="img/icons/thumbs-up-light.png" />
+        </div>
+        </li>
+        <li id="balance2"><img src="img/logofooter.png" class="hiddenLogo"></li>
+        <li class="thumbsDown">
+        <div id="dislike" style="visibility:hidden;"><img src="img/icons/thumbs-down-light.png" />
+        </div>
+        </li>
+        <li><a href="#"><!--<i class="icon-arrow-down icon-white">--></i></a></li>
+      </ul>';
+
+        /*echo '<ul class="nav footer">
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
         <li><a href="story.php"><img src="img/logofooter.png" class="hiddenLogo"></a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
-      </ul>';
+      </ul>'; */
       } else {
         echo '<ul class="nav footer">
         <li><a href="#"><!--<i class="icon-share icon-white">--></i></a></li>
@@ -42,40 +55,152 @@
 </div>
 
 <script type="text/javascript">
+  
+  var like = document.getElementById("like");
+  var dislike = document.getElementById("dislike");
+
+  //toggle on the thumbs up & down and make them mutually exclusive
   $("#like").click(function() {
+    if (dislike.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs down has been replaced by red
+    { 
+      $(dislike).find('img').toggle();
+    };
       $(this).find('img').toggle();
   });
-
-  //redirect if user selects 'dislike'
   $("#dislike").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs down has been replaced by red
+    { 
+      $(like).find('img').toggle();
+    };
       $(this).find('img').toggle();
-      window.location = "./story.php"; //redirects to another story
-
   });
 
+
+  function constructURL (id, isDislike, redirectPage) {
+    var url = "./post_like.php?id=";
+    if (isDislike) {
+      url = url.concat("-");
+    };
+    url = url.concat(id);
+    url = url.concat("&page=");
+    url = url.concat(redirectPage);
+    return url;
+  }
+
+  var storyID = "".concat(<?php echo $_GET['id']; ?>);
+
+  //record your score if you clicked 'balance'
   $("#balance").click(function() {
-    var like = document.getElementById("like");
     if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
-    {    // if it was then img[0] (the grey one) will have display 'none'
-        var url = "./post_like.php?id="
-        var id = <?php echo $_GET['id']; ?>;
-        window.location = url.concat(id); //redirects to another story
-    } else {
-      window.location = "./story.php"; //redirects to another story
-    };      
-  });
-
-  $("#balance2").click(function() {
-    var like = document.getElementById("like");
-    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
-    {    // if it was then img[0] (the grey one) will have display 'none'
-        var url = "./post_like.php?id="
-        var id = <?php echo $_GET['id']; ?>;
-        window.location = url.concat(id); //redirects to another story
-    } else {
-      window.location = "./story.php"; //redirects to another story
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "story");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "story");
+    }
+    else {
+        window.location = "./story.php"; //redirects to another story      
     };
   });
+
+  //This is just the same as the one above but needed because of the button structure for the footer :( sorry (Xan)
+  $("#balance2").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "story");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "story");
+    }
+    else {
+        window.location = "./story.php"; //redirects to another story      
+    };
+  });
+
+  //Logic for what happens if someone clicks off to somewhere else after like/dislike
+  
+  $("#banner-back").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "back");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "back");
+    }
+    else {
+        window.history.go(-1); //goes back one    
+    };
+  });
+
+
+
+  $("#banner-reload").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "reload");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "reload");
+    }
+    else {
+        document.location.reload(); //reloads as per normal for id     
+    };
+  });
+
+
+  $("#banner-home").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "index");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "index");
+    }
+    else {
+        window.location = "./index.php"; //goes to homepage    
+    };
+  });
+
+
+  $("#banner-search").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "search");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "search");
+    }
+    else {
+        window.location = "./search.php"; //goes to search    
+    };
+  });
+
+  $("#banner-profile").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "profile");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "profile");
+    }
+    else {
+        window.location = "./profile.php"; //goes to profile page    
+    };
+  });
+
+  $("#banner-settings").click(function() {
+    if (like.getElementsByTagName("img")[0].style.display == "none") //checks whether the grey thumbs up has been replaced by blue
+    {    // if it was then img[0] (the grey one) will have display 'none' so the blue is displaying
+        window.location = constructURL(storyID, false, "settings");
+    } else if (dislike.getElementsByTagName("img")[0].style.display == "none") 
+    {   //red thumbs down is selected
+        window.location = constructURL(storyID, true, "settings");
+    }
+    else {
+        window.location = "./settings.php"; //goes to profile page    
+    };
+  });
+
 </script>
 
 

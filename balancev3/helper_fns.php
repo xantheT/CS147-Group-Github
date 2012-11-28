@@ -199,5 +199,87 @@ function getCurrStory($id)
 }
 
 
+function displayUserScore($user)
+{
+    $html = "<div class='profile-score-container'>";
+    $html .=  "<table class='profileScores'><th>Socially:</th><th>Fiscally:</th>";
+    $html .= "<tr><td>";
+    $html .= get_social_score_html($user);
+    $html .= "</td><td>";
+    $html .= get_fiscal_score_html($user);
+    $html .= "</td></tr></table></div>"; 
+    return $html;         
+}
+
+//used in fn. below to ensure we never make a users score above 100
+// or below 0. This would cause problems down the line... maybe.
+function adjustValIfNeeded($value)
+{
+    if ($value > 100) {
+        $value = 100;
+    }
+    if ($value < 0) {
+        $value = 0;
+    }
+    return $value;
+}
+
+
+//for the machine learning where we adjust a users score based on like/dislike
+function adjustUserScore($storyID)
+{
+    $normalizer = 50; //NB: this is randomly chose as the normalizer. IS THIS RIGHT???
+
+    $disliked = false;  //if false then it means the user 'liked' the story
+    //Story ID comes in as -ve if it was disliked but +ve if it was liked.
+    if ($storyID < 0) {   //ie. if story was disliked
+        $disliked = true;
+        $storyID = abs($storyID);   //get rid of minus sign so we can get story from db
+    }
+
+    include "config.php";
+    $story = getCurrStory($storyID);
+    $user = getCurrUser();
+
+        //now move the user's scores closer to or further from the article
+        //Soc score
+        $moveScoreBy = ($story->social_scale - $user->social_scale)/$normalizer; // get's distance to move
+            //ECHOS FOR TESTING ONLY_ Leave as comments
+            //echo "<br>move soc by: ".$moveScoreBy;
+        if (!$disliked) {
+            $newSocScore = $user->social_scale + $moveScoreBy;   //if they liked it move them closer
+        } else {
+            $newSocScore = $user->social_scale - $moveScoreBy;  // if they disliked, move them further from it
+        }
+        //make sure we stay within our spectrum range
+        $newSocScore = adjustValIfNeeded($newSocScore);
+            //echo "<br> New Soc score: ".$newSocScore;
+        
+        //fisc score
+        $moveScoreBy = ($story->fiscal_scale - $user->fiscal_scale)/$normalizer; 
+            //echo "<br>move fisc by: ".$moveScoreBy;
+        if (!$disliked) {
+            $newFiscScore = $user->fiscal_scale + $moveScoreBy;  //if they liked it move them closer
+        } else {
+            $newFiscScore = $user->fiscal_scale - $moveScoreBy;  // if they disliked, move them further from it
+        }
+        //make sure we stay within our spectrum range
+        $newFiscScore = adjustValIfNeeded($newFiscScore);
+            //echo "<br> New fisc score: ".$newFiscScore;
+
+        //put new score in DB - use floats to avoid integer cut off if decimal.
+        $query = sprintf("UPDATE balance_users SET fiscal_scale=%f, social_scale=%f WHERE id=%d",
+            mysql_real_escape_string($newFiscScore),
+            mysql_real_escape_string($newSocScore),
+            mysql_real_escape_string($_SESSION['user_id'])
+            );
+        // Actually update db now
+        $result = mysql_query($query);
+
+            //echo "<br>".$query."<br>";
+            //echo "Old soc score: ".$user->social_scale ."   old fisc score: ".$user->fiscal_scale;
+            //echo "<br> New soc score: ".getCurrUser()->social_scale."   new fisc score: ".getCurrUser()->fiscal_scale;
+}
+
 
 ?>

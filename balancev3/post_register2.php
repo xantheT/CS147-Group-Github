@@ -48,5 +48,5 @@
 
 <!-- Now set the persistent info for the session-->
 <script type="text/javascript">
-    window.location = "./index.php"; //redirects to the home page after succesful registration
+    window.location = "./tutorial_pg1.php"; //redirects to the home page after succesful registration
 </script>

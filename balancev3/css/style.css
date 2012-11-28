@@ -213,9 +213,51 @@ p .muted .small {
 	padding-right: 3px;
 	vertical-align: center;
 }
+/* PROFILE*/
+
+.profileScores {
+	text-align: center;
+	width: 80%;
+	margin-bottom: 30px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 5px;
+
+}
+
+.profile-score-container {
+	text-align: center;
+	margin-left: auto;   
+	margin-right: auto;
+	background-color: gray;
+	color: white;
+	border-radius: 10px;
+}
+
+/*SEARCH*/
+.searchBtn {
+	height: 40px;
+	text-align: center;
+	vertical-align: center;
+}
+
+.searchForm {
+	text-align: center;
+}
+
+.searchBox {
+	margin: auto;
+	width: 284px;
+
+}
 
 
 /* Stuff for the d3 graph*/
+.chart {
+	margin-right: auto;
+	margin-left: auto;
+}
+
 .axis text {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 10px;
@@ -233,6 +275,12 @@ p .muted .small {
 	opacity: 0.6;
 }
 
+.dotOther {
+	stroke: black;
+	fill: gray;
+	opacity: 0.6;
+}
+
 .typeLabel {
 	fill: gray;
 	font-size: 11px;
@@ -242,7 +290,7 @@ p .muted .small {
 .backDot {
 	stroke: gray;
 	fill: gray;
-	opacity: 0.2;
+	opacity: 0.05;
 }
 
 

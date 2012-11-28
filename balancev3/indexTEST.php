@@ -71,10 +71,10 @@
 
 		<!-- NOTE DIFF NAMES -->
         <div class="container firstOffset">
-	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab">
+	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab" style="text-align: center;">
 	  			<a href="#trending" class="btn active">Trending</a>
-	  			<a href="#you" class="btn">Similar views</a>
-	 			<a href="#challenge" class="btn">Other views</a>
+	  			<a href="#you" class="btn">For you</a>
+	 			<a href="#challenge" class="btn">Challenge me</a>
 			</div>
 		</div>
 

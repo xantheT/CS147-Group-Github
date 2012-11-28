@@ -46,23 +46,22 @@
 
 			?>
 
-
-			<p class="lead"><strong><?php echo $user->username; ?>'s profile</strong></p>
-
-			<p>Where do you fall on the political spectrum?</p>
-			<p>Fiscally: <?php echo get_fiscal_score_html($user); ?><br />
-			   Socially: <?php echo get_social_score_html($user); ?></p><br />
+			<?php echo displayUserScore($user)?>
 
 			<!-- FOR THE GRAPH!!!! This get's modified on the fly by jscript-->
 			<div id="graph"></div>
-
+			<br />
 			<p>Sharpen your score:
 			<a href="quiz.php" class="btn btn btn-info">Take the quiz!</a></p>
-			<a href="#" class="btn btn-mini" rel="popover" data-placement="right" 
-				data-content="<img src='./img/politicalSpec1'><br><img src='./img/politicalSpec2'>
-				<p class='muted small'>Scores range from 0 to 100: from Left to Right fiscally speaking, then
-				for Social matters Libertarian is at one extreme and Authoritarian on the other.</p>" 
-				data-original-title="What is the political spectrum?">Learn more
+			<a href="#" class="btn" rel="popover" data-placement="bottom" 
+				data-content="
+				<p class='muted small'>Scores range from Liberal to Conservative on both Fiscal and Social Scales: <br/>
+				<strong>Fiscally Liberal</strong>: You support government-funded programs and believe that the government has a responsibility to evenly distribute wealth. <br/>
+				<strong>Fiscally Conservative</strong>: You would believe in less government involvement, free market dynamics and lassaiz-faire. <br/>
+				<strong>Socially Liberal</strong>: You tend to take the liberal side on social issues, such as pro-choice, gay rights, affirmative. <br/>
+				<strong>Socially Conservative</strong>: You tend to take the conservative side on social issues such as pro-life, gun ownership, and school prayer.
+				</p>" 
+				data-original-title="What is the political spectrum?">What is the political spectrum?
 			</a>
 			<br /><br />
 			<p class="lead">Recommended reads</p>
@@ -142,15 +141,31 @@
 <!-- STUFF FOR THE GRAPH OUTPUT OF SOMEONE'S POLITICAL STANCE-->
 				<script src="http://d3js.org/d3.v3.min.js"></script>
 				<script>
-								 console.log(document.getElementById("graph"));
-
 				 //can put in multiple types of data, just get x,y at same data index
 				var xdata = [<?php echo $user->fiscal_scale; ?>], //User data inout from db
-					ydata = [<?php echo $user->social_scale; ?>];
+					ydata = [<?php echo $user->social_scale; ?>],
+					name = ["you"];
+					dataset = [[41,34, "Obama"],[78, 91, "Reagan"], [13, 87, "Fidel Castro"], [7,12, "Ghandi"], [81,36,"Thatcher"]];
+					//toggle data sets - countries, publications, US regions, celebs???
 
-				var margin = {top: 25, right: 20, bottom: 25, left: 15},
-				    width = 300 - margin.left - margin.right,
-				    height = 300 - margin.top - margin.bottom;
+
+				/*TO DRAG YOUR STUFF*/
+				//http://jsfiddle.net/ZrCQE/2/
+				var dragCircle = d3.behavior.drag()
+			    .on('dragstart', function() {
+			        d3.event.sourceEvent.stopPropagation();
+			        console.log('Start Dragging Circle');
+			    })
+			    .on('drag', function(d, i) {
+			        d.cx += d3.event.dx;
+			        d.cy += d3.event.dy;
+			        d3.select(this).attr("cx", d.cx).attr("cy", d.cy)
+			    });
+
+
+				var margin = {top: 25, right: 5, bottom: 25, left: 20},
+				    width = 270 - margin.left - margin.right,
+				    height = 270 - margin.top - margin.bottom;
 
 				var x0 = Math.max(0, 100);
 				var y0 = Math.max(0, 100);
@@ -182,7 +197,7 @@
 					.append('svg:svg')
 					.attr('width', width + margin.right + margin.left)
 					.attr('height', height + margin.top + margin.bottom)
-					.attr('class', 'chart')
+					.attr('class', 'chart');
 
 				var main = chart.append('g')
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
@@ -191,7 +206,8 @@
 					.attr('class', 'main')  
 
 
-				//draw the axes
+
+				//=====  draw the axes  ====
 				main.append('g')
 					.attr('transform', 'translate(0,' + height/2 + ')')
 					.attr('class', 'main axis')
@@ -216,37 +232,102 @@
 				      .style("text-anchor", "end")
 				      .text("Social Scale")*/;
 
+				d3.selection.prototype.moveToFront = function() { 
+				  return this.each(function() { 
+				    this.parentNode.appendChild(this); 
+				  }); 
+				};
 
-				//add background color
+				
+				// ======  add YOUR DOT!  =======
 				main.append("svg:circle")
-				      	  .attr("class", "dot")
-				          .attr("cy", function (d,i) { return y(ydata[i]); } )
-				          .attr("cx", function (d,i) { return x(xdata[i]); } )
-				          .attr("r", 10); //size of the dots
+				    .attr("class", "dot")
+				    .attr("cy", function (d,i) { return y(ydata[i]); } ) 
+				    .attr("cx", function (d,i) { return x(xdata[i]); } ) 
+				    .attr("r", 10) //size of the dot//another axis label 
+				    .on("click", function() {
+      						var sel = d3.select(this);
+     						 sel.moveToFront();
+    				})
+    				//.call(dragCircle);  
+				   
 				 
+				main.append("text")
+				   .text("you") 
+				   .attr("y", function (d,i) { return y(ydata[i]+ 3.5); } )
+				   .attr("x", function (d,i) { return x(xdata[i]+ 3.5); } )
+				   .attr("font-size", "11px")
+				   .attr("fill", "gray");
 
+				//==== end of your dot stuff ====
+
+
+				//=======draw the background colors==========
 				var g = main.append("svg:g");
-
-				//draw the dots
-				/*g.selectAll("scatter-dots")
+				g.selectAll("scatter-dots")
 				      .data(ydata)
 				      .enter().append("svg:circle")
 				      	  .attr("class", "backDot")
 				          .attr("cy", function (d,i) { return y(50); } )
 				          .attr("cx", function (d,i) { return x(50); } )
-				          .attr("r", 26); //size of the dots*/
+				          .attr("r", 40); //size of the dots
+				g.selectAll("scatter-dots")
+				      .data(ydata)
+				      .enter().append("svg:circle")
+				      	  .attr("class", "backDot")
+				          .attr("cy", function (d,i) { return y(50); } )
+				          .attr("cx", function (d,i) { return x(50); } )
+				          .attr("r", 80); 
+				g.selectAll("scatter-dots")
+				      .data(ydata)
+				      .enter().append("svg:circle")
+				      	  .attr("class", "backDot")
+				          .attr("cy", function (d,i) { return y(50); } )
+				          .attr("cx", function (d,i) { return x(50); } )
+				          .attr("r", 120); 
+				g.selectAll("scatter-dots")
+				      .data(ydata)
+				      .enter().append("svg:circle")
+				      	  .attr("class", "backDot")
+				          .attr("cy", function (d,i) { return y(50); } )
+				          .attr("cx", function (d,i) { return x(50); } )
+				          .attr("r", 160); 
+				//======= end background circles ==========
 
-				//label for the data point
-				g.selectAll("text")
-				   .data(xdata)
+
+
+				//============ Comparison peeps ===========
+				//Add the comparison dots for other peeps
+				var gNew = main.append("svg:g");
+				gNew.selectAll("circle")
+					   .data(dataset)
+					   .enter()
+					   .append("circle")
+				       .attr("class", "dotOther")
+				       .attr("cy", function (d,i) { return y(dataset[i][1]); } )
+				       .attr("cx", function (d,i) { return x(dataset[i][0]); } )
+				       .attr("r", 6) //size of the dots
+				       .on("click", function() {
+      						var sel = d3.select(this);
+     						 sel.moveToFront();
+    					});
+
+
+
+				
+				//labels for all data points
+				gNew.selectAll("text")
+				   .data(dataset)
 				   .enter()
 				   .append("text")
-				   .text(function(d) { return "you"}) //The label ...//return xdata[0] + "," + ydata[0]; })
-				   .attr("y", function (d,i) { return y(ydata[i] + 3.5); } )
-				   .attr("x", function (d,i) { return x(xdata[i]+ 3.5); } )
+				   .text(function (d,i) { return dataset[i][2]}) //The label
+				   .attr("y", function (d,i) { return y(dataset[i][1] + 3); } )
+				   .attr("x", function (d,i) { return x(dataset[i][0]+ 3); } )
 				   .attr("font-size", "11px")
 				   .attr("fill", "gray");
 
+
+				// ============  AXES LABELS  ================
 				//another axis label   
 				main.append('g')
 				   .append("text")
@@ -261,7 +342,7 @@
 				   .text("Fiscal Conservative") 
 				   //.attr("transform", "rotate(-90)")
 				   .attr("y", function (d) { return y(53); } )
-				   .attr("x", function (d) { return x(65); } )
+				   .attr("x", function (d) { return x(56); } )
 				   .attr("class", "label")
 				   
 				   ;
@@ -271,7 +352,7 @@
 				   .append("text")
 				   .text("Social Liberal") 
 				   .attr("y", function (d) { return y(-10); } )
-				   .attr("x", function (d) { return x(35); } )
+				   .attr("x", function (d) { return x(34); } )
 				   .attr("class", "label");
 
 				//another axis label   
@@ -282,7 +363,7 @@
 				   .attr("x", function (d) { return x(28); } )
 				   .attr("class", "label");
 
-				//another axis label   
+				//another axis label - MODERATE  
 				/*main.append('g')
 				   .append("text")
 				   .text("Moderate") 

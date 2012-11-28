@@ -19,137 +19,157 @@
   $fiscal_scale = $user->fiscal_scale;
   $social_scale = $user->social_scale;
 
-  //get SOC, FISC LIB
+  //get SOC, FISC LIB quadrant
   $SFLquery = sprintf("SELECT * FROM balance_stories WHERE abs(fiscal_scale)<50 
-                      AND abs(social_scale)<50 ORDER BY RAND() LIMIT 2");
+                      AND abs(social_scale)<50 ORDER BY RAND() LIMIT 4");
   $SFLresult = mysql_query($SFLquery);
 
-  //get SOC, FISC CONS
+  //get SOC, FISC CONS quadrant
   $SFCquery = sprintf("SELECT * FROM balance_stories WHERE abs(fiscal_scale)>50 
-                      AND abs(social_scale)>50 ORDER BY RAND() LIMIT 2");
+                      AND abs(social_scale)>50 ORDER BY RAND() LIMIT 4");
   $SFCresult = mysql_query($SFCquery);
   
-  //get SOC CONS, FISC LIB
+  //get SOC CONS, FISC LIB quadrant
   $SCFLquery = sprintf("SELECT * FROM balance_stories WHERE abs(fiscal_scale)<50 
-                      AND abs(social_scale)>50 ORDER BY RAND() LIMIT 2");
+                      AND abs(social_scale)>50 ORDER BY RAND() LIMIT 4");
   $SCFLresult = mysql_query($SCFLquery);
   
-  //get SOC LIB, FISC CONS
+  //get SOC LIB, FISC CONS quadrant
   $SLFCquery = sprintf("SELECT * FROM balance_stories WHERE abs(fiscal_scale)>50 
-                      AND abs(social_scale)<50 ORDER BY RAND() LIMIT 2");
+                      AND abs(social_scale)<50 ORDER BY RAND() LIMIT 4");
   $SLFCresult = mysql_query($SLFCquery);
 
 
-
-//OUTPUT THE RESULTS NOW - for 3 quadrants that user is not in
-  if (($user->fiscal_scale>=50 && $user->social_scale>=50)
-      || ($user->fiscal_scale>=50 && $user->social_scale<=50)
-      || ($user->fiscal_scale<=50 && $user->social_scale>=50)
-        ) {
-    echo "<h4>Socially and Fiscally Liberal</h4>";
-    $outputs = 0;
-    while ($row = mysql_fetch_assoc($SFLresult)) { //loops through results and output list
-      $outputs += 1;
-      if ($outputs >1) {
-        echo output_story_brief($row);
-      } else {
-        echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
+//Get the user's quadrant
+    if (($user->fiscal_scale <= 50 && $user->social_scale <= 50)) {
+      $userQuadrant = "SFL";
+      $oppositeQuadrant = "SFC";
+    } 
+    elseif (($user->fiscal_scale >= 50 && $user->social_scale >= 50)) {
+        $userQuadrant = "SFC";
+        $oppositeQuadrant = "SFL";
+      } 
+    elseif (($user->fiscal_scale <= 50 && $user->social_scale>=50)) {
+        $userQuadrant = "SCFL";
+        $oppositeQuadrant = "SLFC";
       }
-    }
-    if ($outputs == 0) { //we have nothing to recommend or they have read all recommendations
-            echo "<p class='muted'>There are no current stories in this category.
-              Why don't you try something new? Start balancing - read a random story by clicking <img src='img/logo.png' class='minilogo'> below. </p>";
-    }
+    elseif (($user->fiscal_scale>=50 && $user->social_scale<=50)) {
+        $userQuadrant = "SLFC";
+        $oppositeQuadrant = "SCFL";
+      }
+
+
+  function outputRest($categoryResults, $main, $numAlreadyOut)
+  {
+    $outputs = 0;
+      while ($row = mysql_fetch_assoc($categoryResults)) { //loops through results and output list
+        $outputs += 1;
+        if (($outputs >1) || ($main==true)) {
+          echo output_story_brief($row);
+        } else {
+          echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
+          $main = true;
+        }
+      }
+      if (($outputs+$numAlreadyOut) == 0) { //we have nothing to recommend or they have read all recommendations
+              echo "<p class='muted'>There are no current stories in this category.
+                Why don't you try something new? Start balancing - read a random story by clicking <img src='img/logo.png' class='minilogo'> below. </p>";
+      }
   }
 
-  if (($user->fiscal_scale<=50 && $user->social_scale<=50)
-      || ($user->fiscal_scale>=50 && $user->social_scale<=50)
-      || ($user->fiscal_scale<=50 && $user->social_scale>=50)
-        ) {
-    echo "<h4>Socially and Fiscally Conservative</h4>";
+  function outputHalfOpposite($result, $total) { //output half of the results for the opposite quadrant
     $outputs = 0;
-    while ($row = mysql_fetch_assoc($SFCresult)) { //loops through results and output list
-      $outputs += 1;
-      if ($outputs >1) {
-        echo output_story_brief($row);
-      } else {
-        echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
+    $main = false;
+      while ($row = mysql_fetch_assoc($result)) { //loops through results and output list
+        $outputs += 1;
+        if ($outputs <= $total) {  //only output half
+          if ($outputs >1) {
+            echo output_story_brief($row);
+          } else {
+            echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
+            $main = true;
+          }
+        }
       }
-    }
-    if ($outputs == 0) { //we have nothing to recommend or they have read all recommendations
-            echo "<p class='muted'>There are no current stories in this category.
-              Why don't you try something new? Start balancing - read a random story by clicking <img src='img/logo.png' class='minilogo'> below. </p>";
-    }
+    return $main;
   }
 
-  if (($user->fiscal_scale>=50 && $user->social_scale>=50)
-      || ($user->fiscal_scale<=50 && $user->social_scale<=50)
-      || ($user->fiscal_scale>=50 && $user->social_scale<=50)
-        ) {
-    echo "<h4>Socially Conservative, Fiscally Liberal</h4>";
+  function outputSecondHalfOpposite($result, $total) { //output half of the results for the opposite quadrant
     $outputs = 0;
-    while ($row = mysql_fetch_assoc($SCFLresult)) { //loops through results and output list
-      $outputs += 1;
-      if ($outputs >1) {
-        echo output_story_brief($row);
-      } else {
-        echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
+    $main = false;
+      while ($row = mysql_fetch_assoc($result)) { //loops through results and output list
+        $outputs += 1;
+        if ($outputs > $total) {  //only output 2nd half of results
+          if (($outputs == ($total+1))|| ($outputs == ($total+0.5)) ){
+            echo output_main_story_brief($row);   //one main story for the 1st rendered one
+            $main = true;
+          } else {
+            echo output_story_brief($row); //output the rest in list format
+          }
+        }
       }
-    }
-    if ($outputs == 0) { //we have nothing to recommend or they have read all recommendations
-            echo "<p class='muted'>There are no current stories in this category.
-              Why don't you try something new? Start balancing - read a random story by clicking <img src='img/logo.png' class='minilogo'> below. </p>";
-    }
+    return $main;  
   }
 
 
-  if (($user->fiscal_scale>=50 && $user->social_scale>=50)
-      || ($user->fiscal_scale<=50 && $user->social_scale<=50)
-      || ($user->fiscal_scale<=50 && $user->social_scale>=50)
-        ) {
-    echo "<h4>Socially Liberal, Fiscally Conservative</h4>";
-    $outputs = 0;
-    while ($row = mysql_fetch_assoc($SLFCresult)) { //loops through results and output list
-      $outputs += 1;
-      if ($outputs >1) {
-        echo output_story_brief($row);
-      } else {
-        echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
-      }
-    }
-    if ($outputs == 0) { //we have nothing to recommend or they have read all recommendations
-            echo "<p class='muted'>There are no current stories in this category.
-              Why don't you try something new? Start balancing - read a random story by clicking <img src='img/logo.png' class='minilogo'> below. </p>";
-    }
+  //output stuff  - diff depending on what kind of user you are. The big difference is just which is your opposite corner
+  // because we split up the rendering of the opposite corner into either financial or social bucket
+  if ($userQuadrant=="SFL") 
+  {
+    $num_rows = mysql_num_rows($SFCresult); //for opposite quadrant
+    echo "<legend>Socially Conservative</legend>";
+    $main1 = outputHalfOpposite($SFCresult, $num_rows/2);
+    outputRest($SCFLresult, $main1, $num_rows/2);
+
+    echo "<legend>Fiscally Conservative</legend>";
+    mysql_data_seek($SFCresult, 0);
+    $main2 = outputSecondHalfOpposite($SFCresult, $num_rows/2);
+    outputRest($SLFCresult, $main2, $num_rows/2);
+    echo "<br />";
+  } 
+  elseif ($userQuadrant == "SFC") 
+  {
+    $num_rows = mysql_num_rows($SFLresult); //for opposite quadrant
+    echo "<legend>Socially Liberal</legend>";
+    $main1 = outputHalfOpposite($SFLresult, $num_rows/2);
+    outputRest($SLFCresult, $main1, $num_rows/2);
+
+    echo "<legend>Fiscally Liberal</legend>";
+    mysql_data_seek($SFLresult, 0);
+    $main2 = outputSecondHalfOpposite($SFLresult, $num_rows/2);
+    outputRest($SCFLresult, $main2, $num_rows/2);
+    echo "<br />";
+  }
+  elseif ($userQuadrant == "SCFL") 
+  {
+    $num_rows = mysql_num_rows($SLFCresult); //for opposite quadrant
+    echo "<legend>Socially Liberal</legend>";
+    $main1 = outputHalfOpposite($SLFCresult, $num_rows/2);
+    outputRest($SFLresult, $main1, $num_rows/2);
+
+    echo "<legend>Fiscally Conservative</legend>";
+    mysql_data_seek($SLFCresult, 0);
+    $main2 = outputSecondHalfOpposite($SLFCresult, $num_rows/2);
+    outputRest($SFCresult, $main2, $num_rows/2);
+    echo "<br />";
+  }
+  elseif ($userQuadrant == "SLFC") 
+  {
+    $num_rows = mysql_num_rows($SCFLresult); //for opposite quadrant
+    echo "<legend>Socially Conservative</legend>";
+    $main1 = outputHalfOpposite($SCFLresult, $num_rows/2);
+    outputRest($SFCresult, $main1, $num_rows/2);
+
+    echo "<legend>Fiscally Liberal</legend>";
+    mysql_data_seek($SCFLresult, 0);
+    $main2 = outputSecondHalfOpposite($SCFLresult, $num_rows/2);
+    outputRest($SFLresult, $main2, $num_rows/2);
     echo "<br />";
   }
 
 
-//----------------END A/B TEST STUFF ---------------------------------
 
 
-
-  //STUFF BELOW IS THE LOGIC FROM THE NORMAL CHALLENGEME.PHP FILE
-  // ---------------------------------------------------
-  /*$query = sprintf("SELECT * FROM balance_stories WHERE abs(fiscal_scale - %d)>30 
-                      AND abs(social_scale - %d)>30 ORDER BY RAND() LIMIT 5",
-          mysql_real_escape_string($user->fiscal_scale),
-          mysql_real_escape_string($user->social_scale)
-          );
-  $result = mysql_query($query);
-  $outputs = 0;
-  while ($row = mysql_fetch_assoc($result)) { //loops through results and output list
-    $outputs += 1;
-    if ($outputs >1) {
-      echo output_story_brief($row);
-    } else {
-      echo output_main_story_brief($row);  //makes 1 main story (at top) and the rest in list format
-    }
-  }
-  if ($outputs == 0) { //we have nothing to recommend or they have read all recommendations
-          echo "<p class='muted'>You're up to date on all of the stories that differ from your views.
-            Why don't you try something new? Start balancing - read a random story by clicking <img src='img/logo.png' class='minilogo'> below. </p>";
-  }*/
 ?>
 
 
