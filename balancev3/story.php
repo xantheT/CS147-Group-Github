@@ -18,6 +18,10 @@
 	
 		<?php
 		//partial for the top banner of the page
+		$home='""';
+		$search='""';
+		$profile='""';
+		$settings='""';
 		include("banner.php");
 		?>
 

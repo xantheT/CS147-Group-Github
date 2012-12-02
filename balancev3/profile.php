@@ -47,9 +47,14 @@
 			?>
 
 			<?php echo displayUserScore($user)?>
-
+			<div id="loader"></div>
 			<!-- FOR THE GRAPH!!!! This get's modified on the fly by jscript-->
 			<div id="graph"></div>
+			<div class="scrollCircles" id="scroller">
+				<img src="./img/icons/activeCirlce.png" class="activeCircle" id="leftCircle"/>
+				<img src="./img/icons/activeCirlce.png" class="inactiveCircle" id="middleCircle"/>
+				<img src="./img/icons/activeCirlce.png" class="inactiveCircle" id="rightCircle"/>
+			</div>
 			<br />
 			<p>Sharpen your score:
 			<a href="quiz.php" class="btn btn btn-info">Take the quiz!</a></p>
@@ -138,6 +143,60 @@
 
 
 
+	<!-- STUFF FOR THE SWIPE-->
+	<!-- lisenced by MIT or GPL Version 2 licenses.-->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="./js/jquery.touchSwipe.js"></script>
+	<script src="./js/jquery.touchSwipe.min.js"></script>
+	<script>
+		$(function()
+			{	
+				//This fn below is a spinner - reference: http://jsfiddle.net/gK9wH/9/
+				$(window).load(function(){
+    				$('#loader').fadeOut("fast");    
+				});
+				jQuery.noConflict();		
+				//Enable swiping...
+				$("#graph").swipe( {
+					swipeLeft:function(event, direction, distance, duration, fingerCount) {
+						var politicos = document.getElementById("politicalPeeps");
+						var countries = document.getElementById("countries");
+						var publications = document.getElementById("publications");
+						if ((countries.style.display == "none") && (publications.style.display == "none") ) { //peeps showing
+							$("#politicalPeeps").fadeOut("slow");
+							$("#countries").fadeIn();
+							document.getElementById("leftCircle").className = "inactiveCircle";
+							document.getElementById("middleCircle").className = "activeCircle";
+						} else if ((politicos.style.display == "none") && (publications.style.display == "none") ) { //countries showing
+							$("#countries").fadeOut("slow");
+							$("#publications").fadeIn();
+							document.getElementById("middleCircle").className = "inactiveCircle";
+							document.getElementById("rightCircle").className = "activeCircle";
+						};
+					},
+					swipeRight:function(event, direction, distance, duration, fingerCount) {
+						var politicos = document.getElementById("politicalPeeps");
+						var countries = document.getElementById("countries");
+						var publications = document.getElementById("publications");
+						if ((countries.style.display == "none") && (politicos.style.display == "none") ) {
+							$("#publications").fadeOut("slow");
+							$("#countries").fadeIn();
+							document.getElementById("rightCircle").className = "inactiveCircle";
+							document.getElementById("middleCircle").className = "activeCircle";
+						} else if ((politicos.style.display == "none") && (publications.style.display == "none") ) {
+							$("#countries").fadeOut("slow");
+							$("#politicalPeeps").fadeIn();
+							document.getElementById("middleCircle").className = "inactiveCircle";
+							document.getElementById("leftCircle").className = "activeCircle";
+						};
+					},
+					//Default is 75px, set to 0 for demo so any distance triggers swipe
+					threshold:75
+				});
+			});
+	</script>
+	<!-- END STUFF FOR THE SWIPE-->
+
 <!-- STUFF FOR THE GRAPH OUTPUT OF SOMEONE'S POLITICAL STANCE-->
 				<script src="http://d3js.org/d3.v3.min.js"></script>
 				<script>
@@ -145,8 +204,10 @@
 				var xdata = [<?php echo $user->fiscal_scale; ?>], //User data inout from db
 					ydata = [<?php echo $user->social_scale; ?>],
 					name = ["you"];
-					dataset = [[41,34, "Obama"],[78, 91, "Reagan"], [13, 87, "Fidel Castro"], [7,12, "Ghandi"], [81,36,"Thatcher"]];
+					dataset = [[41,34, "Obama"],[78, 91, "Reagan"], [13, 87, "Fidel Castro"], [7,12, "Ghandi"], [71,23,"Huffington"]];
 					//toggle data sets - countries, publications, US regions, celebs???
+					datasetCountries = [[41,34, "UK"],[7, 12, "Sweden"], [22, 87, "China"], [64,55, "Chile"], [71,75,"Vatican"]];
+					datasetPublications = [[87,91, "Fox"],[18, 7, "Rolling Stone"], [47, 43, "Economist"], [67,62, "Wash. Post"], [42,35,"NY Times"]];
 
 
 				/*TO DRAG YOUR STUFF*/
@@ -297,9 +358,11 @@
 
 
 				//============ Comparison peeps ===========
+				//-----------POLITICAL PEEPS
 				//Add the comparison dots for other peeps
-				var gNew = main.append("svg:g");
-				gNew.selectAll("circle")
+				var gPolitics = main.append("svg:g")
+							.attr("id", "politicalPeeps");
+				gPolitics.selectAll("circle")
 					   .data(dataset)
 					   .enter()
 					   .append("circle")
@@ -311,12 +374,9 @@
       						var sel = d3.select(this);
      						 sel.moveToFront();
     					});
-
-
-
 				
-				//labels for all data points
-				gNew.selectAll("text")
+				//labels for all comparison data points
+				gPolitics.selectAll("text")
 				   .data(dataset)
 				   .enter()
 				   .append("text")
@@ -325,6 +385,73 @@
 				   .attr("x", function (d,i) { return x(dataset[i][0]+ 3); } )
 				   .attr("font-size", "11px")
 				   .attr("fill", "gray");
+
+				//-----------COUNTRIES
+				//Add the comparison dots for other peeps
+				var gCountries = main.append("svg:g")
+							.attr("id", "countries")
+							.style("display", "none");
+
+				gCountries.selectAll("circle")
+					   .data(datasetCountries)
+					   .enter()
+					   .append("circle")
+				       .attr("class", "dotOther")
+				       .attr("cy", function (d,i) { return y(datasetCountries[i][1]); } )
+				       .attr("cx", function (d,i) { return x(datasetCountries[i][0]); } )
+				       .attr("r", 6) //size of the dots
+				       .on("click", function() {
+      						var sel = d3.select(this);
+     						 sel.moveToFront();
+    					});
+				
+				//labels for all comparison data points
+				gCountries.selectAll("text")
+				   .data(datasetCountries)
+				   .enter()
+				   .append("text")
+				   .text(function (d,i) { return datasetCountries[i][2]}) //The label
+				   .attr("y", function (d,i) { return y(datasetCountries[i][1] + 3); } )
+				   .attr("x", function (d,i) { return x(datasetCountries[i][0]+ 3); } )
+				   .attr("font-size", "11px")
+				   .attr("fill", "gray");
+				
+
+				//-----------Publications
+				//Add the comparison dots for other peeps
+				var gPubs = main.append("svg:g")
+							.attr("id", "publications")
+							.style("display", "none");
+
+				gPubs.selectAll("circle")
+					   .data(datasetPublications)
+					   .enter()
+					   .append("circle")
+				       .attr("class", "dotOther")
+				       .attr("cy", function (d,i) { return y(datasetPublications[i][1]); } )
+				       .attr("cx", function (d,i) { return x(datasetPublications[i][0]); } )
+				       .attr("r", 6) //size of the dots
+				       .on("click", function() {
+      						var sel = d3.select(this);
+     						 sel.moveToFront();
+    					});
+				
+				//labels for all comparison data points
+				gPubs.selectAll("text")
+				   .data(datasetPublications)
+				   .enter()
+				   .append("text")
+				   .text(function (d,i) { return datasetPublications[i][2]}) //The label
+				   .attr("y", function (d,i) { return y(datasetPublications[i][1] + 3); } )
+				   .attr("x", function (d,i) { return x(datasetPublications[i][0]+ 3); } )
+				   .attr("font-size", "11px")
+				   .attr("fill", "gray");
+
+
+				//============ END Comparison peeps ===========
+
+
+
 
 
 				// ============  AXES LABELS  ================

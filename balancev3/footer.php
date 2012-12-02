@@ -8,7 +8,7 @@
           <span class="footLogo" id="balance"><img src="img/logofooter.png" class="logo"></span>
 
       <!-- Alter footer options if viewing a story-->
-      <?php if ($story ==false) {
+      <?php if ($story ==false) {  //the footer for everything but in a story
         echo '<ul class="nav footer">
         <li><a href="#"><!--<i class="icon-share icon-white">--></i></a></li>
         <li class="thumbsUp"><div id="like" style="visibility:hidden;"><img src="img/icons/thumbs-up-light.png" />
@@ -22,24 +22,46 @@
         <li><a href="#"><!--<i class="icon-arrow-down icon-white">--></i></a></li>
       </ul>';
 
-        /*echo '<ul class="nav footer">
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="story.php"><img src="img/logofooter.png" class="hiddenLogo"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-      </ul>'; */
-      } else {
+      
+      } else {  //the footer for stories
+        
+        // --- Work out if they've already liked/disliked story ---
+        //sets the styling to display or hide the colored thumbs        
+        $grayLikeDisplay = "";
+        $blueLikeDisplay = 'style="display:none"';
+        $grayDislikeDisplay = "";
+        $redDislikeDisplay = 'style="display:none"';
+        
+        $storiesLikedStr = getCurrUser()->stories_liked;  //get user's (dis)liked stories
+        $likesArr = explode(',', $storiesLikedStr); //put all read stories into array
+        foreach ($likesArr as &$id) {
+            if ( (string)(abs((int)$id)) == $_GET['id']) {
+              //the user liked or disliked this story
+              if ((int)$id > 0) { //they liked it 
+                $grayLikeDisplay = 'style="display:none"';
+                $blueLikeDisplay = "";
+                $grayDislikeDisplay = "";
+                $redDislikeDisplay = 'style="display:none"';
+              } else {
+                $grayLikeDisplay = "";
+                $blueLikeDisplay = 'style="display:none"';
+                $grayDislikeDisplay = 'style="display:none"';
+                $redDislikeDisplay = "";
+              }
+              break;
+            }
+        }
+
         echo '<ul class="nav footer">
         <li><a href="#"><!--<i class="icon-share icon-white">--></i></a></li>
-        <li class="thumbsUp"><div id="like"><img src="img/icons/thumbs-up-light.png" />
-                        <img src="img/icons/thumbs-up-blue.png" style="display:none"/>
+        <li class="thumbsUp"><div id="like"><img src="img/icons/thumbs-up-light.png"'.$grayLikeDisplay.' />
+                        <img src="img/icons/thumbs-up-blue.png" '.$blueLikeDisplay.'/>
         </div>
         </li>
         <li id="balance2"><img src="img/logofooter.png" class="hiddenLogo"></li>
         <li class="thumbsDown">
-        <div id="dislike"><img src="img/icons/thumbs-down-light.png" />
-                        <img src="img/icons/thumbs-down-red.png" style="display:none"/>
+        <div id="dislike"><img src="img/icons/thumbs-down-light.png" '.$grayDislikeDisplay.'/>
+                        <img src="img/icons/thumbs-down-red.png" '.$redDislikeDisplay.'/>
         </div>
         </li>
         <li><a href="#"><!--<i class="icon-arrow-down icon-white">--></i></a></li>

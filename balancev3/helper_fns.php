@@ -202,7 +202,8 @@ function getCurrStory($id)
 function displayUserScore($user)
 {
     $html = "<div class='profile-score-container'>";
-    $html .=  "<table class='profileScores'><th>Socially:</th><th>Fiscally:</th>";
+    $html .= "Hello <a href=\"profile.php\">".$user->username."</a>, our data suggests you are:";
+    $html .=  "<table class='profileScores'><th>Socially</th><th>Fiscally</th>";
     $html .= "<tr><td>";
     $html .= get_social_score_html($user);
     $html .= "</td><td>";

@@ -31,9 +31,9 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container firstOffset">
-			<form class="form-search" action="search_result.php" method="post">
+			<form class="form-search" action="search_result.php" id="search" name="search" method="post">
 
-			    <input type="text" class="span2 search-query" id="appendedInputButtons" name="query" placeholder="Search...">
+			    <input type="text" class="span2 search-query" id="query" name="query" placeholder="Search..." onkeyup="query_onkeyup()">
 			    <button type="reset" class="btn"><i class="icon-remove"></i></button>
 			    <button type="submit" class="btn"><i class="icon-search"></i></button>
 
@@ -75,11 +75,79 @@
 		    event.preventDefault();
 		    window.location = $(this).attr("href");
 		});
+
+		//document.getElementById("clearer").style.display = "none";
+
+
+		//The following function appends some html containers and an icon that clears the text field when pressed
+		//inspiration for this was take from: http://jsfiddle.net/PvFSF/  - creative commons
+		(function ($, undefined) {
+		    $.fn.clearable = function () {
+		        var $this = this;
+		        $this.wrap('<div class="clear-holder" />');
+		        var helper = $('<span class="clear-helper" id="clearer" style="display:none;"><img src="img/icons/clear.png" class="clearImg"></span>');
+		        $this.parent().append(helper);
+		        helper.click(function(){
+		            $this.val("");
+		            $("#clearer").fadeOut("fast");
+		        });
+		    };
+		})(jQuery);
+		
+		$("#query").clearable();
+		
+
+		function query_onkeyup() 
+		{
+			var text = document.getElementById("query");
+		   	if (text.value == "") {
+		   		$("#clearer").fadeOut("fast");
+		   	} else if (text.value != "") {
+		   		$("#clearer").fadeIn("fast");
+		   	};
+		   
+		}
+
+
+
 		</script>
 
 
 				<!-- Below java script from twitter bootstrap-->
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<script type="text/javascript">
+		$("#search").submit(function(){
+			
+			// Validation
+			$("#search").validate({
+				rules:{
+				query:{required:true},
+				},
+
+				messages:{
+					query:"Please specify a username",
+				},
+
+				errorClass: "help-inline",
+				errorElement: "span",
+				highlight:function(element, errorClass, validClass)
+				{
+				$(element).parents('.control-group').addClass('error');
+				},
+				unhighlight: function(element, errorClass, validClass)
+				{
+				$(element).parents('.control-group').removeClass('error');
+				//$(element).parents('.control-group').addClass('success');
+				}
+			});
+			if(!$("#search").valid()) {
+				return false;
+			} else {
+				return true;
+			}
+		});
+		</script>
+
 
 		<script src="js/bootstrap-button.js"></script>
 	    <script src="js/jquery.js"></script>

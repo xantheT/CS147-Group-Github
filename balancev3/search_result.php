@@ -33,20 +33,41 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container firstOffset">
+			<form class="form-search" action="search_result.php" id="search" name="search" method="post">
+
+			    <input type="text" class="span2 search-query" id="query" name="query" placeholder="Search..." onkeyup="query_onkeyup()" value =<?php echo $_POST["query"];?> >
+			    <button type="reset" class="btn"><i class="icon-remove"></i></button>
+			    <button type="submit" class="btn"><i class="icon-search"></i></button>
+
+			  <!-- Code from bootstrap for appended two buttons: 
+			  
+			  <div class="input-append">
+				<input class="span2" id="appendedInputButtons" type="text">
+				<button class="btn" type="button">Search</button>
+			  <button class="btn" type="button">Options</button>
+  			  </div>
+				-->
+				
+				<!-- previous code without clear button (xanthe: delete if you don't want to keep this)
+				<div class="container firstOffset">
 			<form class="form-search searchForm" action="search_result.php" method="post">
   			   <div class="input-append searchBox">
-			    <input type="text" class="span2 search-query" name="query" placeholder="Search..." value=<?php echo $_POST["query"];?> >
+			    <input type="text" class="span2 search-query" name="query" placeholder="Search...">
 			    <button type="submit" class="btn searchBtn"><i class="icon-search"></i></button>
 			  </div>
+			</form>
+			<p class="muted">Begin your search for a story above.</p>
+		</div>
+		-->
 			</form>
 
 			<!-- Note: minor error is reloading the search_Result.php page from the url without a search query produces errors -->
 			<!-- Think above worry is fixed now -->
-			<p class="muted"> <!-- Start of container for results-->
+			<div class="muted"> <!-- Start of container for results-->
 			<?php
 				$search_query = $_POST["query"];
 				if ($search_query == "") {
-					echo "Begin your search for a story above";
+					echo "<p style=\"margin-left:auto; margin-right:auto; width:90%;\">Begin your search for a story above</p>";
 				} else {
 					include("config.php");
 					$sql_query = "SELECT * FROM balance_stories";
@@ -93,6 +114,35 @@
 		    event.preventDefault();
 		    window.location = $(this).attr("href");
 		});
+
+		//The following function appends some html containers and an icon that clears the text field when pressed
+		//inspiration for this was take from: http://jsfiddle.net/PvFSF/  - creative commons
+		(function ($, undefined) {
+		    $.fn.clearable = function () {
+		        var $this = this;
+		        $this.wrap('<div class="clear-holder" />');
+		        var helper = $('<span class="clear-helper" id="clearer"><img src="img/icons/clear.png" class="clearImg"></span>');
+		        $this.parent().append(helper);
+		        helper.click(function(){
+		            $this.val("");
+		            $("#clearer").fadeOut("fast");
+		        });
+		    };
+		})(jQuery);
+		
+		$("#query").clearable();
+		
+
+		function query_onkeyup() 
+		{
+			var text = document.getElementById("query");
+		   	if (text.value == "") {
+		   		$("#clearer").fadeOut("fast");
+		   	} else if (text.value != "") {
+		   		$("#clearer").fadeIn("fast");
+		   	};
+		   
+		}
 		</script>
 
 

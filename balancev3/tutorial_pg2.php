@@ -101,6 +101,24 @@ data-content="Use the back button to return to previous pages" data-original-tit
 		<!-- This is after the header -->
         <div class="container firstOffset">
 	       <div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><p> <strong> Welcome to Balance! </strong> <br/> This is a replicated version of a story page. Click or hover over anything to see what it does!</p></div>		       
+	       <div class='profile-score-container'>
+        	Hello <a href="#" rel="popover" data-placement="bottom"
+data-content="This link will take you to your profile, where you can view your political score!" data-original-title="Your Profile" data-trigger="hover"> 
+        		<?php
+        			include "config.php";
+        			$user = getCurrUser();
+        			echo $user->username; 
+        		?> </a>
+        		, our data suggests you are:
+        		<table class='profileScores'><th>Socially:</th><th>Fiscally:</th>
+        		<tr><td>
+					<a href="#" rel="popover" data-placement="bottom"
+data-content="This shows our calculated social score for you. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Social Score" data-trigger="hover"> <?php echo get_social_score_html($user); ?></a>
+				</td><td>
+					<a href="#" rel="popover" data-placement="bottom"
+data-content="This shows our calculated fiscal score for you. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Fiscal Score" data-trigger="hover"> <?php echo get_fiscal_score_html($user); ?></a>
+				</td></tr></table></div>
+
 	       <?php
 				include("config.php");
 				//Get the ID from the URL argument after .../story.php?id=x

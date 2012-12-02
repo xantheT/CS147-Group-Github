@@ -1,6 +1,24 @@
+/*spinny loading thing - reference: http://jsfiddle.net/gK9wH/9/ */
+#loader {
+    background: url("http://www.aveva.com/Images/ajax-loader.gif") no-repeat scroll center center ;
+    position: absolute;
+    height: 10%;
+    width: 10%;
+    left: 45%;
+	top: 57%;
+}
+
 .navbarText {
 	color: #81817B;
 	text-align: center;
+}
+
+.navIcons {
+	width: 15px;
+	height: 14px;
+	padding-right: 18px;
+	margin-bottom: 3px;
+	/*padding-left: 86px; - makes them a bit more central*/
 }
 
 .menu {
@@ -70,7 +88,8 @@
 
 .splash {
 	vertical-align: top;
-	padding-top: 4px;
+	padding-top: 0px;
+	margin-top: -2px;
 }
 
 p .muted .small {
@@ -234,6 +253,24 @@ p .muted .small {
 	border-radius: 10px;
 }
 
+.activeCircle {
+	height: 9px;
+	width: 9px;
+}
+
+.inactiveCircle {
+	height: 9px;
+	width: 9px;
+	opacity: 0.5;
+}
+
+
+.scrollCircles {
+	text-align: center;
+	padding-top: 5px;
+}
+
+
 /*SEARCH*/
 .searchBtn {
 	height: 40px;
@@ -250,6 +287,28 @@ p .muted .small {
 	width: 284px;
 
 }
+
+.clear-holder{
+    position:relative;
+    float:left;  
+}
+.clear-helper{
+    position:absolute;
+    right:7px;
+    top: 10px;
+    cursor: pointer;
+    vertical-align: center;
+    height: 40px;
+    display: block;
+}
+
+.clearImg {
+	height: 17px;
+	width:17px;
+}
+
+
+
 
 
 /* Stuff for the d3 graph*/

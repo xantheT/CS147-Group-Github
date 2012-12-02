@@ -28,19 +28,19 @@
             <ul class="nav headerList">
               <li class="">
               	<!-- Page refresh icon, perhaps only have this present in news pages, e.g. not on profile-->
-                <a href="javascript:document.location.reload();" id="banner-reload" onclick="return false"><i class="icon-repeat icon-white"></i>reload</a>
+                <a href="javascript:document.location.reload();" id="banner-reload" onclick="return false"><img src="img/icons/refreshDark.png" class ="navIcons">reload</a>
               </li>
               <li class=<?php echo $home;?>>
-                <a href="./index.php" id="banner-home" onclick="return false"><i class="icon-home icon-white"></i>home</a> <!-- CHANGE THIS BACK TO MOBILE.PHP AFTER A/B/ TEST-->
+                <a href="./index.php" id="banner-home" onclick="return false"><img src="img/icons/homeDark.png" class ="navIcons">home</a> <!-- CHANGE THIS BACK TO MOBILE.PHP AFTER A/B/ TEST-->
               </li>
               <li class=<?php echo $search;?>>
-                <a href="./search.php" id="banner-search" onclick="return false"><i class="icon-search icon-white"></i>search</a>
+                <a href="./search.php" id="banner-search" onclick="return false"><img src="img/icons/searchDark.png" class ="navIcons">search</a>
               </li>
               <li class=<?php echo $profile;?>>
-                <a href="./profile.php" id="banner-profile" onclick="return false"><i class="icon-user icon-white"></i>profile</a>
+                <a href="./profile.php" id="banner-profile" onclick="return false"><img src="img/icons/userDark.png" class ="navIcons">profile</a>
               </li>
               <li class=<?php echo $settings;?>>
-                <a href="./settings.php" id="banner-settings" onclick="return false"><i class="icon-cog icon-white"></i>settings</a>
+                <a href="./settings.php" id="banner-settings" onclick="return false"><img src="img/icons/settingsDark.png" class ="navIcons">settings</a>
               </li>
             </ul>
           </div>
