@@ -31,34 +31,17 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container firstOffset">
-			<form class="form-search" action="search_result.php" id="search" name="search" method="post">
 
-			    <input type="text" class="span2 search-query" id="query" name="query" placeholder="Search..." onkeyup="query_onkeyup()">
-			    <button type="reset" class="btn"><i class="icon-remove"></i></button>
-			    <button type="submit" class="btn"><i class="icon-search"></i></button>
 
-			  <!-- Code from bootstrap for appended two buttons: 
-			  
-			  <div class="input-append">
-				<input class="span2" id="appendedInputButtons" type="text">
-				<button class="btn" type="button">Search</button>
-			  <button class="btn" type="button">Options</button>
-  			  </div>
-				-->
-				
-				<!-- previous code without clear button (xanthe: delete if you don't want to keep this)
-				<div class="container firstOffset">
-			<form class="form-search searchForm" action="search_result.php" method="post">
+
+			<form class="form-search searchForm searchForm1" action="search_result.php" id="search" name="search" method="post">
   			   <div class="input-append searchBox">
-			    <input type="text" class="span2 search-query" name="query" placeholder="Search...">
+			    <input type="text" class="span2 search-query" id="query" name="query" placeholder="Search..." onkeyup="query_onkeyup()">
 			    <button type="submit" class="btn searchBtn"><i class="icon-search"></i></button>
 			  </div>
 			</form>
-			<p class="muted">Begin your search for a story above.</p>
-		</div>
-		-->
-			</form>
-			<div class="muted" style="margin-left:auto; margin-right:auto; width:90%;">Begin your search for a story above.</p>
+			<div class="muted" style="margin-left:auto; margin-right:auto; width:83%;">Begin your search for a story above.</p>
+		
 		</div>
 
 		<!-- Footer -->

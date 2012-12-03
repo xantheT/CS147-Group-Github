@@ -1656,7 +1656,7 @@ select:focus:required:invalid:focus {
 }
 
 input.search-query {
-  padding-right: 14px;
+  padding-right: 24px;
   padding-right: 4px \9;
   padding-left: 14px;
   padding-left: 4px \9;

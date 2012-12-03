@@ -33,32 +33,12 @@
 
 		<!-- PLACE BODY INSIDE HERE - this is within the header and the footer-->
 		<div class="container firstOffset">
-			<form class="form-search" action="search_result.php" id="search" name="search" method="post">
-
-			    <input type="text" class="span2 search-query" id="query" name="query" placeholder="Search..." onkeyup="query_onkeyup()" value =<?php echo $_POST["query"];?> >
-			    <button type="reset" class="btn"><i class="icon-remove"></i></button>
-			    <button type="submit" class="btn"><i class="icon-search"></i></button>
-
-			  <!-- Code from bootstrap for appended two buttons: 
-			  
-			  <div class="input-append">
-				<input class="span2" id="appendedInputButtons" type="text">
-				<button class="btn" type="button">Search</button>
-			  <button class="btn" type="button">Options</button>
-  			  </div>
-				-->
-				
-				<!-- previous code without clear button (xanthe: delete if you don't want to keep this)
-				<div class="container firstOffset">
-			<form class="form-search searchForm" action="search_result.php" method="post">
+			
+			<form class="form-search searchForm" action="search_result.php" id="search" name="search" method="post">
   			   <div class="input-append searchBox">
-			    <input type="text" class="span2 search-query" name="query" placeholder="Search...">
+			    <input type="text" class="span2 search-query" id="query" name="query" placeholder="Search..." onkeyup="query_onkeyup()" value =<?php echo $_POST["query"];?> >
 			    <button type="submit" class="btn searchBtn"><i class="icon-search"></i></button>
 			  </div>
-			</form>
-			<p class="muted">Begin your search for a story above.</p>
-		</div>
-		-->
 			</form>
 
 			<!-- Note: minor error is reloading the search_Result.php page from the url without a search query produces errors -->
@@ -67,7 +47,7 @@
 			<?php
 				$search_query = $_POST["query"];
 				if ($search_query == "") {
-					echo "<p style=\"margin-left:auto; margin-right:auto; width:90%;\">Begin your search for a story above</p>";
+					echo "<p style=\"margin-left:auto; margin-right:auto; width:83%;\">Begin your search for a story above</p>";
 				} else {
 					include("config.php");
 					$sql_query = "SELECT * FROM balance_stories";
@@ -91,7 +71,7 @@
 						}
 					}
 					if ($no_results) {
-							echo "No results found for <strong>\"".$search_query."\"</strong><br/>";
+							echo "<p style=\"margin-left:auto; margin-right:auto; width:83%;\">No results found for <strong>\"".$search_query."\"</strong><br/></p>";
 						}
 				}
 				?>
