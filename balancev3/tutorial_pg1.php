@@ -56,7 +56,7 @@
 
 
 	<body>
-	
+	
 		<!-- Note,back button to the header... make invisible on homepage??? -->
 		<!-- Simon: removed partial for banned and copied code below for tutorial page -->
 		<div class=" navbar-static-top navbar-inverse navbar">
@@ -68,69 +68,67 @@
 		          </button>
 		          <span class="navbarText brand">
 		          <!-- back button--> 
-		          	<a href="#" rel="popover" data-placement="bottom"
-data-content="Use the back button to return to previous pages" data-original-title="Back Button"><img src="img/icons/back.png" class="backBtn" data-trigger="hover"></a>
+		          	<a href="javascript:history.go(-2)"><img src="img/icons/back.png" class="backBtn"></a>
 		          	balance</span>
 		          <div class="nav-collapse collapse" style="height: 0px; ">
 		            <ul class="nav headerList">
-		              <li class="">
-		              	<!-- Page refresh icon, perhaps only have this present in news pages, e.g. not on profile-->
-		                <a href="javascript:document.location.reload();"><i class="icon-repeat icon-white"></i>reload</a>
-		              </li>
 		              <li class=<?php echo $home;?>>
-		                <a href="./index.php"><i class="icon-home icon-white"></i>home</a> <!-- CHANGE THIS BACK TO MOBILE.PHP AFTER A/B/ TEST-->
+		                <a href="./index.php"><img src="img/icons/homeDark.png" class ="navIcons">home</a> <!-- CHANGE THIS BACK TO MOBILE.PHP AFTER A/B/ TEST-->
 		              </li>
 		              <li class=<?php echo $search;?>>
-		                <a href="./search.php"><i class="icon-search icon-white"></i>search</a>
+		                <a href="./search.php"><img src="img/icons/searchDark.png" class ="navIcons">search</a>
 		              </li>
 		              <li class=<?php echo $profile;?>>
-		                <a href="./profile.php"><i class="icon-user icon-white"></i>profile</a>
+		                <a href="./profile.php"><img src="img/icons/userDark.png" class ="navIcons">profile</a>
 		              </li>
 		              <li class=<?php echo $settings;?>>
-		                <a href="./settings.php"><i class="icon-cog icon-white"></i>settings</a>
+		                <a href="./settings.php"><img src="img/icons/settingsDark.png" class ="navIcons">settings</a>
 		              </li>
+		              <li>
+		              	<div class="alert"><p>This is your control panel. Use it to navigate around Balance</p></div>
+		            	</li>
 		            </ul>
 		          </div>
-		
 				</div>
 		    </div>
 		  </div>
 		</div>
 
 
-        <div class="container firstOffset">
-	      <div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><p> <strong> Welcome to Balance! </strong> <br/> This is a replicated version of our homepage. Click or hover over anything to see what it does!</p></div>
+        <div class="container offset">
+	      <div class="alert"><p> <strong> Welcome to Balance! </strong> <br/> This is a dummy homepage. Tap anything to see what it is!</p></div>
 	        	        <div class="btn-group menu" data-toggle="buttons-radio" id="btnTab">
+	  			<a href="#" rel="popover" data-placement="right"
+data-content="Popular stories that are hot off the press, regardless of their political leanings, can be found here." data-original-title="Trending Stories" class="btn" data-trigger="click">Trending</a>
 	  			<a href="#" rel="popover" data-placement="bottom"
-data-content="The Trending button show you any recent popular stories regardless of its political leanings" data-original-title="Trending Stories" class="btn" data-trigger="hover">Trending</a>
-	  			<a href="#" rel="popover" data-placement="bottom"
-data-content="This button shows you the stories that are nearest to where you lie on the political spectrum according to our calculations. Our calculations are not perfect but will improve as you read and like more stories!" data-original-title="Stories With Similar Views" class="btn" data-trigger="hover">For you</a>
+data-content="Stories that we've identified as sharing a political ID similar to your own. Our calculations are not perfect but will improve as you read and like more stories!" data-original-title="Stories With Similar Views" class="btn" data-trigger="click">For you</a>
 	 			<a href="#" rel="popover" data-placement="bottom"
-data-content="This button shows you the stories that disagree with either your social or political views according to where our calculations indicate you lie on the political spectrum. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Stories With Different Views" class="btn" data-trigger="hover">Challenge me</a>
+data-content="Stories that are situated further from you on the political spectrum. The political ID of these stories will differ either from your social or fiscal views, or both. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Stories With Different Views" class="btn" data-trigger="click">Challenge me</a>
 			</div>
 		</div>
 
         <div class="container">
-        	<div class='profile-score-container'>
-        	Hello <a href="#" rel="popover" data-placement="bottom"
-data-content="This link will take you to your profile, where you can view your political score!" data-original-title="Your Profile" data-trigger="hover"> 
-        		<?php
-        			include "config.php";
-        			$user = getCurrUser();
-        			echo $user->username; 
-        		?> </a>
-        		, our data suggests you are:
-        		<table class='profileScores'><th>Socially:</th><th>Fiscally:</th>
-        		<tr><td>
-					<a href="#" rel="popover" data-placement="bottom"
-data-content="This shows our calculated social score for you. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Social Score" data-trigger="hover"> <?php echo get_social_score_html($user); ?></a>
-				</td><td>
-					<a href="#" rel="popover" data-placement="bottom"
-data-content="This shows our calculated fiscal score for you. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Fiscal Score" data-trigger="hover"> <?php echo get_fiscal_score_html($user); ?></a>
-				</td></tr></table></div>
+        
         	<div id="myTabContent" class="tab-content">
               <div class="tab-pane fade active in" id="trending">
               	
+
+              	<p class="muted small indexInfo">Your political ID: 
+              		<?php 
+              			include("config.php");
+              			$user = getCurrUser();
+              			echo '<a href="#" rel="popover" data-placement="bottom"
+								data-content="This shows our calculated social score for you. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Social ID" data-trigger="click"> '
+              			.get_short_social_score_html($user)
+              			.'</a>  '
+              			.'<a href="#" rel="popover" data-placement="bottom"
+								data-content="This shows our calculated fiscal score for you. Our calculations are not perfect but but will improve as you read and like more stories!" data-original-title="Fiscal ID" data-trigger="click">'
+              			.get_short_fiscal_score_html($user)
+              			.'</a>';
+              		?>
+              	</p>
+
+
                 <?php
 				//--------------------------------
 				//--Logic to get 'top' stories ---
@@ -149,7 +147,7 @@ data-content="This shows our calculated fiscal score for you. Our calculations a
 				        $html_output = "";
 				        $html_output.= "<ul class=\"nav nav-tabs nav-stacked story\">";
 				        $html_output.= "<li>";
-				        $html_output.= "<div><a href=\"#\" rel=\"popover\" data-placement=\"right\" data-content=\"Clicking a story will take you to the page to read the story!\" data-original-title=\"Story\" data-trigger=\"hover\">";
+				        $html_output.= "<div><a href=\"#\" rel=\"popover\" data-placement=\"bottom\" data-content=\"Tapping a story will take you to the page to read the story!\" data-original-title=\"Story\" data-trigger=\"click\">";
 				        $html_output.= "<img src=\"img/stories/".$row["picture"]."\" class=\"subStory\">";
 				        $html_output.= $row["title"];
 				        $html_output.= "<br/>";
@@ -168,8 +166,8 @@ data-content="This shows our calculated fiscal score for you. Our calculations a
 				        //compile html output for the main story brief format
 				        $html_output = "";
 				        $html_output .= "<div class=\"mainStory\"><div class=\"mainStory-inner story\">";
-				        $html_output .= "<a href=\"#\" rel=\"popover\" data-placement=\"right\" data-content=\"Clicking a story will take you to the page to read the story!\" data-original-title=\"Story\" data-trigger=\"hover\">";
 				        $html_output .= "<div class=\"item\">";
+				        $html_output .= "<a href=\"#\" rel=\"popover\" data-placement=\"bottom\" data-content=\"Tapping a story will take you to the page to read the story!\" data-original-title=\"Story\" data-trigger=\"click\">";
 				        $html_output .= "<img src=\"img/stories/".$row["picture"]."\">";
 				        $html_output .= "<div class=\"mainStory-caption\">";
 				        $html_output .= "<p>".$row["title"]."</p>";
@@ -200,10 +198,15 @@ data-content="This shows our calculated fiscal score for you. Our calculations a
 				?>
               </div>
             </div>
-            <div class="alert-success"><button type="button" class="close" data-dismiss="alert">x</button><p> Finished checking out the buttons on the home page? Click <a href="tutorial_pg2.php"> here </a> to learn about our story page!</p></div>
 
-
-        </div>
+			  
+            <ul class="pager">
+			  <li class="next">
+			    <a href="tutorial_pg2.php">You're almost done. Learn about the Story page before you leave   &rarr;</a>
+			  </li>
+			</ul>
+			<br />
+			
 
         
 		<!-- This is the footer for the homepage part of the tutorial -->
@@ -223,7 +226,7 @@ data-content="This shows our calculated fiscal score for you. Our calculations a
 		        <li><a href="#"></a></li>
 		        <li><a href="#"></a></li>
 		        <li><a href="#" rel="popover" data-placement="top"
-data-content="This button will give you a random story to read" data-original-title="Random Story Button" data-trigger="hover"><img src="img/logofooter.png" class="hiddenLogo"></a></li>
+data-content="Tapping this button will give you a random story to read" data-original-title="Balance Button" data-trigger="click"><img src="img/logofooter.png" class="hiddenLogo"></a></li>
 		        <li><a href="#"></a></li>
 		        <li><a href="#"></a></li>
 		      </ul>';

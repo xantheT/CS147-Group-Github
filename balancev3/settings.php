@@ -44,7 +44,9 @@
 				    </div>
 				    <div id="collapseOne" class="accordion-body collapse">
 				      <div class="accordion-inner">
-				        In the face of increasingly polarized news where the most extreme voices are the loudest, Balance gives you access to a spectrum of views to form a balanced opinion.
+				        In the face of increasingly polarized news where the most extreme voices are the loudest, Balance gives you access to a spectrum of views to help you form a balanced opinion.
+				        <br /><br />
+				        We are a team of Stanford students hoping to levarage mobile media consumption to help readers be more informed, more aware and more balanced. 
 				      </div>
 				    </div>
 				  </div>
@@ -58,7 +60,8 @@
 				    </div>
 				    <div id="collapseTwo" class="accordion-body collapse">
 				      <div class="accordion-inner">
-				        Click <a href="tutorial_pg1.php" id="key" data-icon="custom">here</a> to retake the Balance Tutorial.
+				        Explore different aspects of the app, get to know the labeling system like a pro and find out how we learn your political preferences. 
+				        <br /><a href="tutorial_pg1.php" id="key" data-icon="custom">Take the interactive tutorial</a>
 				      </div>
 				    </div>
 				  </div>
@@ -72,8 +75,7 @@
 				    </div>
 				    <div id="collapseThree" class="accordion-body collapse">
 				      <div class="accordion-inner">
-				        Please  <a href="mailto:sax@balance.com?Subject=Hello Balance!">
-email us</a> for any suggestions/complaints.
+				        We'd love to hear from you. <a href="mailto:sax@balance.com?Subject=Hello Balance!">Let us know</a> how we're doing or what we could improve on.
 				      </div>
 				    </div>
 				  </div>
@@ -81,8 +83,8 @@ email us</a> for any suggestions/complaints.
 				  <!-- This is the collapse-able Logout box -->
 				  <div class="accordion-group">
 				    <div class="accordion-heading">
-				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-				        Logout
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="./post_logout.php">
+				        <strong>Log Out</strong>
 				      </a>
 				    </div>
 				    <div id="collapseFour" class="accordion-body collapse">

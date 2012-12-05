@@ -45,28 +45,29 @@
 				//--------------------------------
 
 			?>
-
+		<div class="colorContainer">
 			<?php echo displayUserScore($user)?>
 			<div id="loader"></div>
 			<!-- FOR THE GRAPH!!!! This get's modified on the fly by jscript-->
 			<div id="graph"></div>
+		</div>
 			<div class="scrollCircles" id="scroller">
 				<img src="./img/icons/activeCirlce.png" class="activeCircle" id="leftCircle"/>
 				<img src="./img/icons/activeCirlce.png" class="inactiveCircle" id="middleCircle"/>
 				<img src="./img/icons/activeCirlce.png" class="inactiveCircle" id="rightCircle"/>
 			</div>
 			<br />
-			<p>Sharpen your score:
+			<p>Refine your political ID:
 			<a href="quiz.php" class="btn btn btn-info">Take the quiz!</a></p>
 			<a href="#" class="btn" rel="popover" data-placement="bottom" 
 				data-content="
-				<p class='muted small'>Scores range from Liberal to Conservative on both Fiscal and Social Scales: <br/>
-				<strong>Fiscally Liberal</strong>: You support government-funded programs and believe that the government has a responsibility to evenly distribute wealth. <br/>
-				<strong>Fiscally Conservative</strong>: You would believe in less government involvement, free market dynamics and lassaiz-faire. <br/>
-				<strong>Socially Liberal</strong>: You tend to take the liberal side on social issues, such as pro-choice, gay rights, affirmative. <br/>
+				<p class='muted small'>Scores range from Liberal to Conservative on both Fiscal and Social Scales: <br /><br />
+				<strong>Fiscally Liberal</strong>: You support government-funded programs and believe that the government has a responsibility to evenly distribute wealth. <br/><br />
+				<strong>Fiscally Conservative</strong>: You would believe in less government involvement, free market dynamics and lassaiz-faire. <br/><br />
+				<strong>Socially Liberal</strong>: You tend to take the liberal side on social issues, such as pro-choice, gay rights, affirmative. <br/><br />
 				<strong>Socially Conservative</strong>: You tend to take the conservative side on social issues such as pro-life, gun ownership, and school prayer.
 				</p>" 
-				data-original-title="What is the political spectrum?">What is the political spectrum?
+				>What is the political spectrum?
 			</a>
 			<br /><br />
 			<p class="lead">Recommended reads</p>
@@ -455,24 +456,39 @@
 
 
 				// ============  AXES LABELS  ================
-				//another axis label   
+				//1st half of fiscal liberal  
 				main.append('g')
 				   .append("text")
-				   .text("Fiscal Liberal") 
-				   .attr("y", function (d) { return y(53); } )
-				   .attr("x", function (d) { return x(-5); } )
-				   .attr("class", "label");
+				   .text("Fiscal") 
+				   .attr("y", function (d) { return y(52); } )
+				   .attr("x", function (d) { return x(-8); } )
+				   .attr("class", "typeLabel");
 
-				//another axis label   
+				//2nd half of fiscal liberal
 				main.append('g')
 				   .append("text")
-				   .text("Fiscal Conservative") 
+				   .text("Liberal") 
+				   .attr("y", function (d) { return y(45); } )
+				   .attr("x", function (d) { return x(-8); } )
+				   .attr("class", "typeLabel");
+
+				//1st half of fiscal conservative  
+				main.append('g')
+				   .append("text")
+				   .text("Fiscal") 
 				   //.attr("transform", "rotate(-90)")
-				   .attr("y", function (d) { return y(53); } )
-				   .attr("x", function (d) { return x(56); } )
-				   .attr("class", "label")
-				   
-				   ;
+				   .attr("y", function (d) { return y(52); } )
+				   .attr("x", function (d) { return x(88); } )
+				   .attr("class", "typeLabel") ;
+
+				 //2nd half of fiscal conservative  
+				main.append('g')
+				   .append("text")
+				   .text("Conserv.") 
+				   //.attr("transform", "rotate(-90)")
+				   .attr("y", function (d) { return y(45); } )
+				   .attr("x", function (d) { return x(83); } )
+				   .attr("class", "typeLabel") ;
 
 				//another axis label   
 				main.append('g')
@@ -480,7 +496,7 @@
 				   .text("Social Liberal") 
 				   .attr("y", function (d) { return y(-10); } )
 				   .attr("x", function (d) { return x(34); } )
-				   .attr("class", "label");
+				   .attr("class", "typeLabel");
 
 				//another axis label   
 				main.append('g')
@@ -488,7 +504,7 @@
 				   .text("Social Conservative") 
 				   .attr("y", function (d) { return y(105); } )
 				   .attr("x", function (d) { return x(28); } )
-				   .attr("class", "label");
+				   .attr("class", "typeLabel");
 
 				//another axis label - MODERATE  
 				/*main.append('g')

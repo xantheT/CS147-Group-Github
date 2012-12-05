@@ -29789,7 +29789,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2012-11-30 22:43:59 +0000</string>
+	<string>2012-12-03 21:53:16 +0000</string>
 	<key>Modifier</key>
 	<string>Xanthe Travlos</string>
 	<key>NotesVisible</key>
@@ -29853,7 +29853,7 @@
 			<key>BackgroundGraphic</key>
 			<dict>
 				<key>Bounds</key>
-				<string>{{0, 0}, {1118, 655}}</string>
+				<string>{{0, 0}, {1118, 823.0502512562814}}</string>
 				<key>Class</key>
 				<string>SolidGraphic</string>
 				<key>ID</key>
@@ -29877,7 +29877,7 @@
 			<key>CanvasOrigin</key>
 			<string>{0, 0}</string>
 			<key>CanvasSize</key>
-			<string>{1118, 655}</string>
+			<string>{1118, 823.0502512562814}</string>
 			<key>ColumnAlign</key>
 			<integer>1</integer>
 			<key>ColumnSpacing</key>
@@ -40829,7 +40829,7 @@ XantheT's profile}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>9</integer>
+		<integer>8</integer>
 		<key>ExpandedCanvases</key>
 		<array>
 			<dict>
@@ -40852,7 +40852,7 @@ XantheT's profile}</string>
 		<key>SidebarWidth</key>
 		<integer>192</integer>
 		<key>VisibleRegion</key>
-		<string>{{0, 0}, {397.5, 293}}</string>
+		<string>{{207.5, 175.5}, {397.5, 293}}</string>
 		<key>Zoom</key>
 		<real>2</real>
 		<key>ZoomValues</key>

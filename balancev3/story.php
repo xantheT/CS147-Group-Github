@@ -22,6 +22,7 @@
 		$search='""';
 		$profile='""';
 		$settings='""';
+		$back = "back";
 		include("banner.php");
 		?>
 
@@ -31,7 +32,7 @@
 		<?php
 	        include("config.php");
 	        $user = getCurrUser();
-        	echo displayUserScore($user);
+        	
 			//Get the ID from the URL argument after .../story.php?id=x
 			$id = $_GET["id"];
 			
@@ -75,7 +76,7 @@
 			echo "<h4>".$title."</h4>";
 			// source OF STORY
 			echo "<p class=\"muted small\">".$source.", ".$time
-				." ".get_social_score_html($row)." ".get_fiscal_score_html($row);
+				."   ".get_short_social_score_html($row)." ".get_short_fiscal_score_html($row);
 			// PIC FOR STORY
 			echo "<p><img src=\"".$picture."\" alt=\"alternative text here\"/></p>";
 			// BODY OF STORY

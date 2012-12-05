@@ -6,8 +6,24 @@
             <img src="img/icons/menu.png">
           </button>
           <span class="navbarText brand">
-          <!-- back button--> 
-          	<a href="javascript:history.go(-1)" id="banner-back" onclick="return false"><img src="img/icons/back.png" class="backBtn"></a>
+          <!-- back button and reload button this works out when each should be displayed or not--> 
+            <?php if ($back != "back") {
+              if ($home == '"active"') {
+                $reload = "";
+                $back = "'display:none;'";
+              }
+              else {
+                $reload = "'display:none;'";
+                $back = "'visibility:hidden;'";
+              }
+            } else {
+              $back = "''";
+              $reload = "'display:none;'";
+            }  
+            ?>
+          	<a href="javascript:history.go(-1)" id="banner-back" onclick="return false" style=<?php echo $back?>><img src="img/icons/back.png" class="backBtn"></a>
+            <a href="javascript:document.location.reload();" id="banner-reload" onclick="return false" style=<?php echo $reload?>><img src="img/icons/refreshDark.png" class ="navRefresh"></a>
+
 
             <?php 
             $heading = "balance";
@@ -26,10 +42,11 @@
           	</span>
           <div class="nav-collapse collapse" style="height: 0px; ">
             <ul class="nav headerList">
-              <li class="">
-              	<!-- Page refresh icon, perhaps only have this present in news pages, e.g. not on profile-->
-                <a href="javascript:document.location.reload();" id="banner-reload" onclick="return false"><img src="img/icons/refreshDark.png" class ="navIcons">reload</a>
-              </li>
+                    <!-- REFRESH - we added this for our testing initially. but no longer needed -->
+                    <!--<li class="">-->
+                    	<!-- Page refresh icon, perhaps only have this present in news pages, e.g. not on profile-->
+                      <!--<a href="javascript:document.location.reload();" id="banner-reload" onclick="return false"><img src="img/icons/refreshDark.png" class ="navIcons">reload</a>
+                    </li>-->
               <li class=<?php echo $home;?>>
                 <a href="./index.php" id="banner-home" onclick="return false"><img src="img/icons/homeDark.png" class ="navIcons">home</a> <!-- CHANGE THIS BACK TO MOBILE.PHP AFTER A/B/ TEST-->
               </li>
@@ -49,3 +66,7 @@
     </div>
   </div>
 </div>
+
+
+
+

@@ -67,6 +67,7 @@
 		$search='""';
 		$profile='""';
 		$settings='""';
+		$back='""';
 		include("banner.php");
 		?>
 
@@ -80,11 +81,7 @@
 		</div>
 
         <div class="container">
-        <?php 
-	        include("config.php");
-	        $user = getCurrUser();
-        	echo displayUserScore($user);
-        ?>
+       
         	<div id="myTabContent" class="tab-content">
               <div class="tab-pane fade active in" id="trending">
               	
@@ -95,12 +92,26 @@
 
               </div>
               <div class="tab-pane fade" id="you">
+              	<p class="muted small indexInfo">News matching your political ID: 
+              		<?php 
+              			include("config.php");
+              			$user = getCurrUser();
+              			echo get_short_social_score_html($user)." ".get_short_fiscal_score_html($user);
+              		?>
+              	</p>
               	<?php
 				//partial for the trending news results
 				include("recommended.php");
 				?>
               </div>
               <div class="tab-pane fade" id="challenge">
+              	<p class="muted small indexInfo">News outside of your political ID: 
+              		<?php 
+              			include("config.php");
+              			$user = getCurrUser();
+              			echo get_short_social_score_html($user)." ".get_short_fiscal_score_html($user);
+              		?>
+              	</p>
               	<?php
 				//partial for the trending news results
 				include("challengeMe.php");

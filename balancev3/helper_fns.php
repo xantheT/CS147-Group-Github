@@ -177,6 +177,106 @@ function get_fiscal_score_html_ARRAY($row)
 }
 
 
+//Get the shorter Version
+//------------start get shorter version-------------------
+//-------------------------------------------------
+//Takes in a db row and returns the string of html for the fiscal score label
+function get_short_fiscal_score_html($row)
+{
+            if ($row->fiscal_scale > 75) {
+                    $fiscString = "class= 'label label-cons'"; //displays red
+                    $fiscLabel = "Cons.";
+                } elseif (($row->fiscal_scale >= 40) && ($row->fiscal_scale <= 60)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label'"; //displays grey
+                    $fiscLabel = "Mod.";
+                } elseif ($row->fiscal_scale < 25) { //this case should be fairly rare... I think
+                    $fiscString = "class= 'label label-lib'"; //displays grey
+                    $fiscLabel = "Lib.";
+                } elseif (($row->fiscal_scale >= 25) && ($row->fiscal_scale < 40)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-lib'"; //displays grey
+                    $fiscLabel = "Lib.";
+                } elseif (($row->fiscal_scale > 60)&&($row->fiscal_scale <= 75)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-cons'"; //displays grey
+                    $fiscLabel = "Cons.";
+                }
+        return "<span ".$fiscString."><img src='img/icons/pricetag.png' class='scoreImgPrice'>".$fiscLabel."</span>";
+}
+
+//Takes in a db row and returns the string of html for the social score label
+function get_short_social_score_html($row)
+{
+            if ($row->social_scale > 75) {
+                    $socString = "class= 'label label-cons'"; //displays red
+                    $socLabel = "Cons.";
+                } elseif (($row->social_scale >= 40) && ($row->social_scale <= 60)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label'"; //displays grey
+                    $socLabel = "Mod.";
+                } elseif ($row->social_scale < 25) { //this case should be fairly rare... I think
+                    $socString = "class= 'label label-lib'"; //displays grey
+                    $socLabel = "Lib.";
+                } elseif (($row->social_scale >= 25) && ($row->social_scale < 40)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-lib'"; //displays grey
+                    $socLabel = "Lib.";
+                } elseif (($row->social_scale > 60)&&($row->social_scale <= 75)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-cons'"; //displays grey
+                    $socLabel = "Cons.";
+                }                
+    return "<span ".$socString."><img src='img/icons/group.png' class='scoreImgGroup'>".$socLabel."</span>";
+}
+
+//Takes in a db row and returns the string of html for the fiscal score label
+//NB: does this for objects that have to be accessed via the array notation and not -> notation
+function get_short_social_score_html_ARRAY($row)
+{
+            if ($row['social_scale'] > 75) {
+                    $socString = "class= 'label label-cons'"; //displays red
+                    $socLabel = "Cons.";
+                } elseif (($row['social_scale'] >= 40) && ($row['social_scale'] <= 60)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label'"; //displays grey
+                    $socLabel = "Mod.";
+                } elseif ($row['social_scale'] < 25) { //this case should be fairly rare... I think
+                    $socString = "class= 'label label-lib'"; //displays grey
+                    $socLabel = "Lib.";
+                } elseif (($row['social_scale'] >= 25) && ($row['social_scale'] < 40)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-lib'"; //displays grey
+                    $socLabel = "Lib.";
+                } elseif (($row['social_scale'] > 60)&&($row['social_scale'] <= 75)) { //this case should be fairly rare... I think
+                    $socString = "class = 'label label-mod-cons'"; //displays grey
+                    $socLabel = "Cons.";
+                }                
+    return "<span ".$socString."><img src='img/icons/group.png' class='scoreImgGroup'>".$socLabel."</span>";
+}
+
+
+//Takes in a db row and returns the string of html for the social score label
+//NB: does this for objects that have to be accessed via the array notation and not -> notation
+function get_short_fiscal_score_html_ARRAY($row)
+{
+            if ($row['fiscal_scale'] > 75) {
+                    $fiscString = "class= 'label label-cons'"; //displays red
+                    $fiscLabel = "Cons.";
+                } elseif (($row['fiscal_scale'] >= 40) && ($row['fiscal_scale'] <= 60)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label'"; //displays grey
+                    $fiscLabel = "Mod.";
+                } elseif ($row['fiscal_scale'] < 25) { //this case should be fairly rare... I think
+                    $fiscString = "class= 'label label-lib'"; //displays grey
+                    $fiscLabel = "Lib.";
+                } elseif (($row['fiscal_scale'] >= 25) && ($row['fiscal_scale'] < 40)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-lib'"; //displays grey
+                    $fiscLabel = "Lib.";
+                } elseif (($row['fiscal_scale'] > 60)&&($row['fiscal_scale'] <= 75)) { //this case should be fairly rare... I think
+                    $fiscString = "class = 'label label-mod-cons'"; //displays grey
+                    $fiscLabel = "Cons.";
+                }
+        return "<span ".$fiscString."><img src='img/icons/pricetag.png' class='scoreImgPrice'>".$fiscLabel."</span>";
+}
+
+
+//------------end get shorter version--------------
+//-------------------------------------------------
+
+
+
 //queries the current user who is logged in. Acesses this via the session info that we store
 function getCurrUser()
 {
@@ -202,8 +302,8 @@ function getCurrStory($id)
 function displayUserScore($user)
 {
     $html = "<div class='profile-score-container'>";
-    $html .= "Hello <a href=\"profile.php\">".$user->username."</a>, our data suggests you are:";
-    $html .=  "<table class='profileScores'><th>Socially</th><th>Fiscally</th>";
+     //$html .= "Hello <a href=\"profile.php\">".$user->username."</a> our data suggests you are:";//$html .= "Hello <a href=\"profile.php\">".$user->username."</a> our data suggests you are:";
+    $html .=  "<table class='profileScores'><th>Socially:</th><th>Fiscally:</th>";
     $html .= "<tr><td>";
     $html .= get_social_score_html($user);
     $html .= "</td><td>";
@@ -211,6 +311,20 @@ function displayUserScore($user)
     $html .= "</td></tr></table></div>"; 
     return $html;         
 }
+
+function nav_displayUserScore($user)
+{
+   $html = "<div class='profile-score-containerNav'>";
+    $html .= "<small>Our data suggests that these politcal spheres might suit you</small>";//$html .= "Hello <a href=\"profile.php\">".$user->username."</a> our data suggests you are:";
+    $html .=  "<table class='profileScoresNav'><td>Socially:</td><td>Fiscally:</td>";
+    $html .= "<tr><td>";
+    $html .= get_social_score_html($user);
+    $html .= "</td><td>";
+    $html .= get_fiscal_score_html($user);
+    $html .= "</td></tr></table></div>"; 
+    return $html;       
+}
+
 
 //used in fn. below to ensure we never make a users score above 100
 // or below 0. This would cause problems down the line... maybe.
