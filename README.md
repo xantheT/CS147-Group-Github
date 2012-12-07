@@ -1,7 +1,12 @@
 CS147-Group-Github
 ==================
 
-CS147 Group Github
+*************************************************
+access the live version of our app at this url
+*************************************************
+http://stanford.io/PZvxPE
+*************************************************
+
 
 I've set up the github group repository at https://github.com/simonzheng/CS147-Group-Github.git and added both of you as collaborators. Github will be used for version control and group collaborations and anytime you both want to get the latest version of the work, pull from our repository.
 
@@ -22,3 +27,4 @@ $ git add -u <filename> (any time you edit a file that already exists), add that
 $ git commit -m "your commit message"    - to commit your changes
 
 $ git push https://github.com/simonzheng/CS147-Group-Github.git (to push/upload your new changed version to the group github repository)
+
